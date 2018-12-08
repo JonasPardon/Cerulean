@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use SoftDeletes;
+
      /**
      * The attributes that are mass assignable.
      *
@@ -14,12 +17,14 @@ class Product extends Model
     protected $fillable = [
         'id',
         'name',
-        'price',
+        'price_per_unit',
         'unit',
         'weight',
+        'weight_unit',
         'manufactured_in',
         'stock',
         'description',
+        'short_description',
         'extra_description',
     ];
 
