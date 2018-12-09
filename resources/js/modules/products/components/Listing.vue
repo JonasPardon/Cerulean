@@ -11,7 +11,8 @@
             <template slot='items' slot-scope="props">
                 <td>{{ props.item.id }}.</td>
                 <td>{{ props.item.name }}</td>
-                <td>{{ props.item.price_per_unit }} {{ props.item.currency }} / {{ props.item.unit }}</td>
+                <td>{{ props.item.price_per_unit }}</td>
+                <td>{{ props.item.unit }}</td>
                 <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
                 <td>{{ props.item.manufactured_in }}</td>
                 <td>{{ props.item.stock }}</td>
@@ -27,25 +28,32 @@
 
         </v-data-table>
 
-        <!-- <button @click='fetchFirstPage'>First page</button>
-        <button @click='fetchPreviousPage'>Previous page</button>
-        <button @click='fetchNextPage'>Next page</button>
-        <button @click='fetchLastPage'>Last page</button> -->
+        <product-edit 
+            v-model='showEditDialog' 
+            :dialog='showEditDialog' 
+            :product='editable'
+            @close='closeEditDialog'
+            @save='saveProduct' />
     </div>
 
 </template>
 
 <script>
     import axios from 'axios';
+    import Edit from './Edit';
 
     export default {
         name: 'home-component',
+        components: {
+            'product-edit': Edit,
+        },
         data() {
             return {
                 headers: [
                     { text: 'ID', value: 'id' },
                     { text: 'Name', value: 'name' },
                     { text: 'Price', value: 'price_per_unit'},
+                    { text: 'Unit', value: 'unit' },
                     { text: 'Weight', value: 'weight' },
                     { text: 'Manufactured in', value: 'manufactured_in' },
                     { text: 'Stock', value: 'stock' },
@@ -54,6 +62,8 @@
                 products: [],
                 links: {},
                 loading: false,
+                editable: {},
+                showEditDialog: false,
             }
         },
         beforeMount() {
@@ -80,22 +90,36 @@
                     const data = response.data.data;
                     const links = response.data.links;
 
-                    console.log(response.data);
                     this.loading = false;
                     return resolve({data, links});
                 });
             },
-            fetchNextPage() {
-                this.fetchProducts(this.links.next);
+            editItem(product) {
+                this.editable = product;
+                this.showEditDialog = true;
             },
-            fetchPreviousPage() {
-                this.fetchProducts(this.links.prev);
+            closeEditDialog(response) {
+                this.showEditDialog = false;
             },
-            fetchFirstPage() {
-                this.fetchProducts(this.links.first);
-            },
-            fetchLastPage() {
-                this.fetchProducts(this.links.last);
+            async saveProduct(product) {
+                this.showEditDialog = false;
+
+                this.loading = true;
+
+                const response = await axios.patch(
+                    `/api/products/${product.id}`,
+                    product
+                    ).then(response => {
+                        if(response.status === 200) {
+                            this.loading = false;
+                        }else{
+                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`)
+                            this.loading = false;
+                        }
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
             }
         }
     }

@@ -22,24 +22,6 @@
                 </v-list-tile-content>
 
             </v-list-tile>
-
-
-        <!-- <v-list-tile @click="alert('1')">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="alert(2)">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile> -->
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -63,7 +45,7 @@ export default {
         }
     },
     mounted () {
-        console.log(navItems);
+        // console.log(navItems);
     },
     methods: {
         navItemClick(item) {
