@@ -19,7 +19,8 @@
                 class="elevation-1" 
                 :loading='loading'
                 :crud='true'
-                :search='filter' >
+                :search='filter'
+                :rows-per-page-items="[25, 50, 100, { 'text': 'All (might be slow)', 'value': -1 }]" >
 
                 <template slot='items' slot-scope="props">
                     <td>{{ props.item.id }}.</td>

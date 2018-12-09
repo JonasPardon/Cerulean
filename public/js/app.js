@@ -72080,6 +72080,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -72291,7 +72292,13 @@ var render = function() {
               items: _vm.products,
               loading: _vm.loading,
               crud: true,
-              search: _vm.filter
+              search: _vm.filter,
+              "rows-per-page-items": [
+                25,
+                50,
+                100,
+                { text: "All (might be slow)", value: -1 }
+              ]
             },
             scopedSlots: _vm._u([
               {
