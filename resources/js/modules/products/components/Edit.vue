@@ -85,11 +85,9 @@ export default {
     },
     methods: {
         closeDialog() {
-            this.dialog = false;
             this.$emit('close', this.product);
         },
         saveProduct() {
-            this.dialog = false;
             this.$emit('save', this.product);
         }
     }

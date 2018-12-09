@@ -72599,11 +72599,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         closeDialog: function closeDialog() {
-            this.dialog = false;
             this.$emit('close', this.product);
         },
         saveProduct: function saveProduct() {
-            this.dialog = false;
             this.$emit('save', this.product);
         }
     }
