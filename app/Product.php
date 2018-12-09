@@ -19,6 +19,7 @@ class Product extends Model
         'name',
         'price_per_unit',
         'unit',
+        'currency',
         'weight',
         'weight_unit',
         'manufactured_in',

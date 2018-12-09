@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'price_per_unit' => $this->price_per_unit,
             'unit' => $this->unit,
+            'currency' => $this->currency,
             'weight' => $this->weight,
             'weight_unit' => $this->weight_unit,
             'manufactured_in' => $this->manufactured_in,
