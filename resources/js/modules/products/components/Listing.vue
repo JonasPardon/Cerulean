@@ -1,32 +1,45 @@
 <template>
 
     <div>
-        <v-data-table
-            :headers='headers'
-            :items='products'
-            class="elevation-1" 
-            :loading='loading'
-            :crud='true' >
+        <v-card>
+            <v-card-title>
+                <span class="headline">Products</span>
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="filter" 
+                    append-icon="search"
+                    label="Filter"
+                    single-line
+                    hide-details />
+            </v-card-title>
 
-            <template slot='items' slot-scope="props">
-                <td>{{ props.item.id }}.</td>
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.price_per_unit }}</td>
-                <td>{{ props.item.unit }}</td>
-                <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
-                <td>{{ props.item.manufactured_in }}</td>
-                <td>{{ props.item.stock }}</td>
-                <td>
-                    <v-icon small class='mr-2' @click="editItem(props.item)">
-                        edit
-                    </v-icon>
-                    <v-icon small class='mr-2' @click="deleteItem(props.item)">
-                        delete
-                    </v-icon>
-                </td>
-            </template>
+            <v-data-table
+                :headers='headers'
+                :items='products'
+                class="elevation-1" 
+                :loading='loading'
+                :crud='true'
+                :search='filter' >
 
-        </v-data-table>
+                <template slot='items' slot-scope="props">
+                    <td>{{ props.item.id }}.</td>
+                    <td>{{ props.item.name }}</td>
+                    <td>{{ props.item.price_per_unit }}</td>
+                    <td>{{ props.item.unit }}</td>
+                    <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
+                    <td>{{ props.item.manufactured_in }}</td>
+                    <td>{{ props.item.stock }}</td>
+                    <td align='right'>
+                        <v-icon small class='mr-2' @click="editItem(props.item)">
+                            edit
+                        </v-icon>
+                        <v-icon small class='mr-2' @click="deleteItem(props.item)">
+                            delete
+                        </v-icon>
+                    </td>
+                </template>
+            </v-data-table>
+        </v-card>
 
         <product-edit 
             v-model='showEditDialog' 
@@ -57,13 +70,14 @@
                     { text: 'Weight', value: 'weight' },
                     { text: 'Manufactured in', value: 'manufactured_in' },
                     { text: 'Stock', value: 'stock' },
-                    { text: 'Actions', value: ''}
+                    { text: 'Actions', value: '', align: 'right'}
                 ],
                 products: [],
                 links: {},
                 loading: false,
                 editable: {},
                 showEditDialog: false,
+                filter: null,
             }
         },
         beforeMount() {

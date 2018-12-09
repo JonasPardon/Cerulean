@@ -72067,6 +72067,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -72078,12 +72091,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Manufactured in', value: 'manufactured_in' }, { text: 'Stock', value: 'stock' }, { text: 'Actions', value: '' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Manufactured in', value: 'manufactured_in' }, { text: 'Stock', value: 'stock' }, { text: 'Actions', value: '', align: 'right' }],
             products: [],
             links: {},
             loading: false,
             editable: {},
-            showEditDialog: false
+            showEditDialog: false,
+            filter: null
         };
     },
     beforeMount: function beforeMount() {},
@@ -72241,85 +72255,119 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("v-data-table", {
-        staticClass: "elevation-1",
-        attrs: {
-          headers: _vm.headers,
-          items: _vm.products,
-          loading: _vm.loading,
-          crud: true
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "items",
-            fn: function(props) {
-              return [
-                _c("td", [_vm._v(_vm._s(props.item.id) + ".")]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(props.item.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(props.item.price_per_unit))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(props.item.unit))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    _vm._s(props.item.weight) +
-                      " " +
-                      _vm._s(props.item.weight_unit)
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(props.item.manufactured_in))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(props.item.stock))]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "v-icon",
-                      {
-                        staticClass: "mr-2",
-                        attrs: { small: "" },
-                        on: {
-                          click: function($event) {
-                            _vm.editItem(props.item)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        edit\n                    "
-                        )
-                      ]
-                    ),
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            [
+              _c("span", { staticClass: "headline" }, [_vm._v("Products")]),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Filter",
+                  "single-line": "",
+                  "hide-details": ""
+                },
+                model: {
+                  value: _vm.filter,
+                  callback: function($$v) {
+                    _vm.filter = $$v
+                  },
+                  expression: "filter"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-data-table", {
+            staticClass: "elevation-1",
+            attrs: {
+              headers: _vm.headers,
+              items: _vm.products,
+              loading: _vm.loading,
+              crud: true,
+              search: _vm.filter
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "items",
+                fn: function(props) {
+                  return [
+                    _c("td", [_vm._v(_vm._s(props.item.id) + ".")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(props.item.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(props.item.price_per_unit))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(props.item.unit))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(props.item.weight) +
+                          " " +
+                          _vm._s(props.item.weight_unit)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(props.item.manufactured_in))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(props.item.stock))]),
                     _vm._v(" "),
                     _c(
-                      "v-icon",
-                      {
-                        staticClass: "mr-2",
-                        attrs: { small: "" },
-                        on: {
-                          click: function($event) {
-                            _vm.deleteItem(props.item)
-                          }
-                        }
-                      },
+                      "td",
+                      { attrs: { align: "right" } },
                       [
-                        _vm._v(
-                          "\n                        delete\n                    "
+                        _c(
+                          "v-icon",
+                          {
+                            staticClass: "mr-2",
+                            attrs: { small: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.editItem(props.item)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            edit\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-icon",
+                          {
+                            staticClass: "mr-2",
+                            attrs: { small: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.deleteItem(props.item)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            delete\n                        "
+                            )
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      }),
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("product-edit", {
         attrs: { dialog: _vm.showEditDialog, product: _vm.editable },
