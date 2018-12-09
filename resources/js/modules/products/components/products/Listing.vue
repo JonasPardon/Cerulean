@@ -3,7 +3,7 @@
     <div>
         <v-card>
             <v-card-title>
-                <span class="headline">Products</span>
+                <span class="headline">{{ 'Products' | translate }}</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="filter" 
@@ -44,6 +44,9 @@
                         </v-icon>
                         <v-icon small class='mr-2' @click="deleteItem(props.item)">
                             delete
+                        </v-icon>
+                        <v-icon small class='mr-2'>
+                            visibility
                         </v-icon>
                     </td>
                 </template>

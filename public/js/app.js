@@ -88761,6 +88761,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 
 
@@ -89414,7 +89417,9 @@ var render = function() {
           _c(
             "v-card-title",
             [
-              _c("span", { staticClass: "headline" }, [_vm._v("Products")]),
+              _c("span", { staticClass: "headline" }, [
+                _vm._v(_vm._s(_vm._f("translate")("Products")))
+              ]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
@@ -89529,6 +89534,16 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                            delete\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-icon",
+                          { staticClass: "mr-2", attrs: { small: "" } },
+                          [
+                            _vm._v(
+                              "\n                            visibility\n                        "
                             )
                           ]
                         )
