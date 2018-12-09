@@ -1,8 +1,6 @@
 <template>
 
     <div>
-        {{ welcomeMessage }}
-
         <v-data-table
             :headers='headers'
             :items='products'
@@ -36,7 +34,6 @@
         name: 'home-component',
         data() {
             return {
-                welcomeMessage: 'Hello World',
                 headers: [
                     { text: 'ID', value: 'id' },
                     { text: 'Name', value: 'name' },

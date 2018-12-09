@@ -70839,8 +70839,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
 
 
 
@@ -70848,7 +70846,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     name: 'home-component',
     data: function data() {
         return {
-            welcomeMessage: 'Hello World',
             headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Weight', value: 'weight' }, { text: 'Manufactured in', value: 'manufactured_in' }, { text: 'Stock', value: 'stock' }],
             products: [],
             links: {},
@@ -70974,7 +70971,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._v("\n        " + _vm._s(_vm.welcomeMessage) + "\n\n        "),
       _c("v-data-table", {
         staticClass: "elevation-1",
         attrs: {
