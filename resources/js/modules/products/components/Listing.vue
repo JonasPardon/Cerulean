@@ -28,8 +28,9 @@
                     <td>{{ props.item.price_per_unit }}</td>
                     <td>{{ props.item.unit }}</td>
                     <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
-                    <td>{{ props.item.manufactured_in }}</td>
                     <td>{{ props.item.stock }}</td>
+                    <td>{{ formatDate(props.item.created_at.date) }}</td>
+                    <td>{{ formatDate(props.item.updated_at.date) }}</td>
                     <td align='right'>
                         <v-icon small class='mr-2' @click="editItem(props.item)">
                             edit
@@ -55,6 +56,7 @@
 <script>
     import axios from 'axios';
     import Edit from './Edit';
+    import moment from 'moment';
 
     export default {
         name: 'home-component',
@@ -69,8 +71,9 @@
                     { text: 'Price', value: 'price_per_unit'},
                     { text: 'Unit', value: 'unit' },
                     { text: 'Weight', value: 'weight' },
-                    { text: 'Manufactured in', value: 'manufactured_in' },
                     { text: 'Stock', value: 'stock' },
+                    { text: 'Created', value: 'created_at' },
+                    { text: 'Updated', value: 'updated_at' },
                     { text: 'Actions', value: '', align: 'right'}
                 ],
                 products: [],
@@ -135,6 +138,10 @@
                     .catch(err => {
                         alert(err);
                     });
+            },
+            formatDate(date) {
+                // return moment(date).format('LL');
+                return moment(date).calendar();
             }
         }
     }
