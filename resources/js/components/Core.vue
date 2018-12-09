@@ -1,0 +1,45 @@
+<template>
+  <v-app>
+    <navigation :drawer='drawer' />
+    <v-toolbar color="indigo" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Laravel ERP</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout
+          justify-center
+        >
+          <v-flex xs12>
+            <product-list></product-list>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <v-footer color="indigo" app>
+      <span class="white--text">&copy; Laravel ERP</span>
+      <span class=white--text> | Version: 0.0.1</span>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+  import Navigation from './navigation/Navigation';
+  import ProductList from './../modules/products/components/Listing';
+
+  export default {
+    name: 'core',
+    data() {
+      return {
+        drawer: true,
+      }
+    },
+    components: {
+      'navigation': Navigation,
+      'product-list': ProductList,
+    },
+    props: {
+      source: String
+    }
+  }
+</script>

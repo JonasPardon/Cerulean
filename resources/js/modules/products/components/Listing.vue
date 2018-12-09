@@ -14,7 +14,15 @@
                 <td>{{ props.item.price_per_unit }} {{ props.item.currency }} / {{ props.item.unit }}</td>
                 <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
                 <td>{{ props.item.manufactured_in }}</td>
-                <td>{{ props.item.stock }}</td>           
+                <td>{{ props.item.stock }}</td>
+                <td>
+                    <v-icon small class='mr-2' @click="editItem(props.item)">
+                        edit
+                    </v-icon>
+                    <v-icon small class='mr-2' @click="deleteItem(props.item)">
+                        delete
+                    </v-icon>
+                </td>
             </template>
 
         </v-data-table>
@@ -40,7 +48,8 @@
                     { text: 'Price', value: 'price_per_unit'},
                     { text: 'Weight', value: 'weight' },
                     { text: 'Manufactured in', value: 'manufactured_in' },
-                    { text: 'Stock', value: 'stock' }
+                    { text: 'Stock', value: 'stock' },
+                    { text: 'Actions', value: ''}
                 ],
                 products: [],
                 links: {},
