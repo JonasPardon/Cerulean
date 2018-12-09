@@ -5,6 +5,10 @@
       app
     >
       <v-list dense>
+            <div class="logo-wrapper">
+                <!-- <div style="margin: 10%;" v-html="require(`./../../assets/laravel_logo.png`)" ></div> -->
+                <img src="./../../assets/laravel_logo.png" alt="Logo">
+            </div>
             <v-list-tile 
                 v-for="navItem in navItems" 
                 :key='navItem.name'
@@ -56,5 +60,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logo-wrapper {
+    max-width: 100%;
 
+    img {
+        max-width: 100%;
+    }
+}
 </style>

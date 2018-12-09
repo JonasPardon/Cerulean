@@ -71755,7 +71755,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.logo-wrapper[data-v-ae7ecf58] {\n  max-width: 100%;\n}\n.logo-wrapper img[data-v-ae7ecf58] {\n    max-width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -71767,6 +71767,10 @@ exports.push([module.i, "", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__navigation__ = __webpack_require__(73);
+//
+//
+//
+//
 //
 //
 //
@@ -71846,50 +71850,61 @@ var render = function() {
       _c(
         "v-list",
         { attrs: { dense: "" } },
-        _vm._l(_vm.navItems, function(navItem) {
-          return _c(
-            "v-list-tile",
-            {
-              key: navItem.name,
-              on: {
-                click: function($event) {
-                  _vm.navItemClick(navItem.name)
-                }
+        [
+          _c("div", { staticClass: "logo-wrapper" }, [
+            _c("img", {
+              attrs: {
+                src: __webpack_require__(79),
+                alt: "Logo"
               }
-            },
-            [
-              _c(
-                "v-list-tile-action",
-                [
-                  _c("v-icon", [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(navItem.icon) +
-                        "\n                    "
-                    )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-tile-content",
-                [
-                  _c("v-list-tile-title", [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(navItem.label) +
-                        "\n                    "
-                    )
-                  ])
-                ],
-                1
-              )
-            ],
-            1
-          )
-        }),
-        1
+            })
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.navItems, function(navItem) {
+            return _c(
+              "v-list-tile",
+              {
+                key: navItem.name,
+                on: {
+                  click: function($event) {
+                    _vm.navItemClick(navItem.name)
+                  }
+                }
+              },
+              [
+                _c(
+                  "v-list-tile-action",
+                  [
+                    _c("v-icon", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(navItem.icon) +
+                          "\n                    "
+                      )
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-list-tile-content",
+                  [
+                    _c("v-list-tile-title", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(navItem.label) +
+                          "\n                    "
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          })
+        ],
+        2
       )
     ],
     1
@@ -72341,11 +72356,6 @@ var nav = [{
     label: 'Products',
     icon: 'dashboard',
     order: 100
-}, {
-    name: 'test',
-    label: 'Test',
-    icon: 'whatshot',
-    order: 200
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (nav);
@@ -72840,6 +72850,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-a1c84644", module.exports)
   }
 }
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/laravel_logo.png?210f656b12a5126e82a1d14e6486e02d";
 
 /***/ })
 /******/ ]);
