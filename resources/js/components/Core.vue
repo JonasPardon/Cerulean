@@ -12,6 +12,7 @@
         >
           <v-flex xs12>
             <product-list></product-list>
+            <product-category-list class="mt-5"></product-category-list>
           </v-flex>
         </v-layout>
       </v-container>
@@ -25,7 +26,8 @@
 
 <script>
   import Navigation from './navigation/Navigation';
-  import ProductList from './../modules/products/components/Listing';
+  import ProductList from './../modules/products/components/products/Listing';
+  import ProductCategoryList from './../modules/products/components/categories/Listing';
 
   export default {
     name: 'core',
@@ -37,6 +39,7 @@
     components: {
       'navigation': Navigation,
       'product-list': ProductList,
+      'product-category-list': ProductCategoryList,
     },
     props: {
       source: String
