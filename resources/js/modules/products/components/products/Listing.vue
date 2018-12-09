@@ -11,6 +11,13 @@
                     label="Filter"
                     single-line
                     hide-details />
+                <v-btn
+                    class="ml-3"
+                    color="info"
+                    flat>
+                    <v-icon>add</v-icon>
+                    Add
+                </v-btn>
             </v-card-title>
 
             <v-data-table

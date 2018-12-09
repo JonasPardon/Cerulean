@@ -88754,6 +88754,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -89425,7 +89432,17 @@ var render = function() {
                   },
                   expression: "filter"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { staticClass: "ml-3", attrs: { color: "info", flat: "" } },
+                [
+                  _c("v-icon", [_vm._v("add")]),
+                  _vm._v("\n                    Add\n                ")
+                ],
+                1
+              )
             ],
             1
           ),
