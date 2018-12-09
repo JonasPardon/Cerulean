@@ -72529,13 +72529,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'product-edit',
@@ -72734,22 +72727,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: ["0-17", "18-29", "30-54", "54+"],
-                                  label: "Age*",
-                                  required: ""
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
+                            { attrs: { xs12: "" } },
                             [
                               _c("v-combobox", {
                                 attrs: {

@@ -37,14 +37,7 @@
               <v-flex xs12 sm6 md2>
                 <v-text-field label="Stock*" required v-model="product.stock"></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6>
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-flex>
-              <v-flex xs12 sm6>
+              <v-flex xs12>
                 <v-combobox
                     v-model='product.categories'
                     :items="['Category one', 'Category two', 'Category three']"
