@@ -3,7 +3,7 @@
     <div>
         <v-card>
             <v-card-title>
-                <span class="headline">{{ 'Products' | translate }}</span>
+                <span class="headline">Products</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     class="search-filter"

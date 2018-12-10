@@ -90398,12 +90398,29 @@ var nav = [{
     children: [{
         name: 'products',
         label: 'Products',
-        // icon: 'tag',
         route: 'products'
     }, {
         name: 'products.categories',
         label: 'Product categories',
-        route: 'products.categories'
+        route: 'product_categories'
+    }]
+}, {
+    name: 'crm',
+    label: 'CRM',
+    icon: 'whatshot',
+    children: [{
+        name: 'crmplaceholder',
+        label: 'Placeholder',
+        route: 'crm_placeholder'
+    }]
+}, {
+    name: 'hrm',
+    label: 'HRM',
+    icon: 'people',
+    children: [{
+        name: 'hrmplaceholder',
+        label: 'Placeholder',
+        route: 'crm_placeholder'
     }]
 }];
 
@@ -92339,9 +92356,7 @@ var render = function() {
           _c(
             "v-card-title",
             [
-              _c("span", { staticClass: "headline" }, [
-                _vm._v(_vm._s(_vm._f("translate")("Products")))
-              ]),
+              _c("span", { staticClass: "headline" }, [_vm._v("Products")]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
@@ -93546,8 +93561,8 @@ var routes = [{
     path: '/products',
     component: __WEBPACK_IMPORTED_MODULE_0__modules_products_components_products_Listing___default.a
 }, {
-    name: 'products.categories',
-    path: '/products/categories',
+    name: 'product_categories',
+    path: '/product_categories',
     component: __WEBPACK_IMPORTED_MODULE_1__modules_products_components_categories_Listing___default.a
 }];
 

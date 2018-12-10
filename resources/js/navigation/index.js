@@ -7,22 +7,39 @@ const nav = [
             {
                 name: 'products',
                 label: 'Products',
-                // icon: 'tag',
                 route: 'products'
             },
             {
                 name: 'products.categories',
                 label: 'Product categories',
-                route: 'products.categories',
+                route: 'product_categories',
             }
         ]
     },
-    // {
-    //     name: 'test',
-    //     label: 'Test',
-    //     icon: 'whatshot',
-    //     order: 200
-    // },
+    {
+        name: 'crm',
+        label: 'CRM',
+        icon: 'whatshot',
+        children: [
+            {
+                name: 'crmplaceholder',
+                label: 'Placeholder',
+                route: 'crm_placeholder'
+            }
+        ],
+    },
+    {
+        name: 'hrm',
+        label: 'HRM',
+        icon: 'people',
+        children: [
+            {
+                name: 'hrmplaceholder',
+                label: 'Placeholder',
+                route: 'crm_placeholder'
+            }
+        ],
+    }
 ];
 
 export default nav;
