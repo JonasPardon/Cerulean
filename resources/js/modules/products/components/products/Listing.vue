@@ -85,7 +85,7 @@
                     { text: 'Stock', value: 'stock' },
                     { text: 'Created', value: 'created_at' },
                     { text: 'Updated', value: 'updated_at' },
-                    { text: 'Actions', value: '', align: 'right'}
+                    { text: '', value: '', align: 'right', sortable: false}
                 ],
                 products: [],
                 links: {},
