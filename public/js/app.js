@@ -90587,10 +90587,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -90661,6 +90663,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -90669,7 +90684,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'home-component',
     components: {
-        'product-edit': __WEBPACK_IMPORTED_MODULE_2__Edit___default.a
+        'product-edit': __WEBPACK_IMPORTED_MODULE_3__Edit___default.a,
+        'confirm': __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm___default.a
     },
     data: function data() {
         return {
@@ -90678,7 +90694,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             links: {},
             loading: false,
             editable: {},
+            deleteable: {},
             showEditDialog: false,
+            showConfirmDialog: false,
             filter: null
         };
     },
@@ -90778,6 +90796,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.editable = product;
             this.showEditDialog = true;
         },
+        deleteItem: function deleteItem(product) {
+            this.deleteable = product;
+            this.showConfirmDialog = true;
+        },
+        confirmDeleteItem: function confirmDeleteItem() {
+            this.showConfirmDialog = false;
+            alert('Deleting product with id ' + this.deleteable.id);
+            this.deleteable = {};
+        },
         closeEditDialog: function closeEditDialog(response) {
             this.showEditDialog = false;
         },
@@ -90825,7 +90852,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         formatDate: function formatDate(date) {
             // return moment(date).format('LL');
-            return __WEBPACK_IMPORTED_MODULE_3_moment___default()(date).calendar();
+            return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).calendar();
         }
     }
 });
@@ -92507,7 +92534,32 @@ var render = function() {
           },
           expression: "showEditDialog"
         }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "confirm",
+        {
+          attrs: { condition: _vm.showConfirmDialog, title: "Product delete" },
+          on: {
+            cancel: function($event) {
+              _vm.showConfirmDialog = false
+            },
+            confirm: _vm.confirmDeleteItem
+          },
+          model: {
+            value: _vm.showConfirmDialog,
+            callback: function($$v) {
+              _vm.showConfirmDialog = $$v
+            },
+            expression: "showConfirmDialog"
+          }
+        },
+        [
+          _c("div", { staticClass: "body-1" }, [
+            _vm._v("Are you sure you want delete this product?")
+          ])
+        ]
+      )
     ],
     1
   )
@@ -93573,6 +93625,252 @@ var routes = [{
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(219)
+/* template */
+var __vue_template__ = __webpack_require__(220)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/generic/confirm/Confirm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-524725c4", Component.options)
+  } else {
+    hotAPI.reload("data-v-524725c4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 219 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "confirm",
+
+  props: {
+    condition: {
+      type: Boolean,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    cancelText: {
+      type: String,
+      default: 'Cancel'
+    },
+    confirmText: {
+      type: String,
+      default: 'Confirm'
+    },
+    cancelLoading: {
+      type: Boolean,
+      default: false
+    },
+    confirmLoading: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  computed: {
+    _confirmText: function _confirmText() {
+      return this.confirmText;
+    },
+    _cancelText: function _cancelText() {
+      return this.cancelText;
+    }
+  }
+});
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { persistent: "", "max-width": "400" },
+      model: {
+        value: _vm.condition,
+        callback: function($$v) {
+          _vm.condition = $$v
+        },
+        expression: "condition"
+      }
+    },
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", { staticClass: "title font-weight-bold" }, [
+            _vm._v("\n        " + _vm._s(_vm.title) + "\n      ")
+          ]),
+          _vm._v(" "),
+          _c("v-card-text", [_vm._t("default")], 2),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _vm._t("cancel", [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { flat: "", loading: _vm.cancelLoading },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("cancel")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm._cancelText) +
+                        "\n            "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._t("confirm", [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: {
+                      color: "primary",
+                      flat: "",
+                      loading: _vm.confirmLoading
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("confirm")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm._confirmText) +
+                        "\n            "
+                    )
+                  ]
+                )
+              ])
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-524725c4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

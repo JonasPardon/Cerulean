@@ -60,19 +60,33 @@
             :product='editable'
             @close='closeEditDialog'
             @save='saveProduct' />
+
+        <confirm
+            v-model="showConfirmDialog"
+            :condition='showConfirmDialog'
+            title="Product delete"
+            @cancel='showConfirmDialog = false'
+            @confirm='confirmDeleteItem' >
+
+            <div class="body-1">Are you sure you want delete this product?</div>
+
+        </confirm>
     </div>
 
 </template>
 
 <script>
     import axios from 'axios';
-    import Edit from './Edit';
     import moment from 'moment';
+    
+    import Edit from './Edit';
+    import Confirm from './../../../../components/generic/confirm/Confirm';
 
     export default {
         name: 'home-component',
         components: {
             'product-edit': Edit,
+            'confirm': Confirm,
         },
         data() {
             return {
@@ -91,7 +105,9 @@
                 links: {},
                 loading: false,
                 editable: {},
+                deleteable: {},
                 showEditDialog: false,
+                showConfirmDialog: false,
                 filter: null,
             }
         },
@@ -126,6 +142,15 @@
             editItem(product) {
                 this.editable = product;
                 this.showEditDialog = true;
+            },
+            deleteItem(product){
+                this.deleteable = product;
+                this.showConfirmDialog = true;
+            },
+            confirmDeleteItem(){
+                this.showConfirmDialog = false;
+                alert(`Deleting product with id ${this.deleteable.id}`);
+                this.deleteable = {};
             },
             closeEditDialog(response) {
                 this.showEditDialog = false;
