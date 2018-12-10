@@ -147,10 +147,27 @@
                 this.deleteable = product;
                 this.showConfirmDialog = true;
             },
-            confirmDeleteItem(){
+            async confirmDeleteItem(){
                 this.showConfirmDialog = false;
-                alert(`Deleting product with id ${this.deleteable.id}`);
-                this.deleteable = {};
+                this.loading = true;
+
+                const response = await axios.delete(`api/products/${this.deleteable.id}`)
+                    .then(response => {
+                        if(response.status === 200) {
+                            this.loading = false;
+                            this.products = this.products.filter(product => {
+                                return product.id !== this.deleteable.id;
+                            });
+                            this.deleteable = {};
+                        } else {
+                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
+                            this.loading = false;
+                            this.deleteable = {};
+                        }
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
             },
             closeEditDialog(response) {
                 this.showEditDialog = false;
@@ -167,7 +184,7 @@
                         if(response.status === 200) {
                             this.loading = false;
                         }else{
-                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`)
+                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
                             this.loading = false;
                         }
                     })

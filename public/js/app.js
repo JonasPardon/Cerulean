@@ -90800,16 +90800,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.deleteable = product;
             this.showConfirmDialog = true;
         },
-        confirmDeleteItem: function confirmDeleteItem() {
-            this.showConfirmDialog = false;
-            alert('Deleting product with id ' + this.deleteable.id);
-            this.deleteable = {};
-        },
-        closeEditDialog: function closeEditDialog(response) {
-            this.showEditDialog = false;
-        },
-        saveProduct: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(product) {
+        confirmDeleteItem: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
                 var _this3 = this;
 
                 var response;
@@ -90817,17 +90809,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
-                                this.showEditDialog = false;
-
+                                this.showConfirmDialog = false;
                                 this.loading = true;
 
                                 _context4.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/products/' + product.id, product).then(function (response) {
+                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete('api/products/' + this.deleteable.id).then(function (response) {
                                     if (response.status === 200) {
                                         _this3.loading = false;
+                                        _this3.products = _this3.products.filter(function (product) {
+                                            return product.id !== _this3.deleteable.id;
+                                        });
+                                        _this3.deleteable = {};
                                     } else {
                                         alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
                                         _this3.loading = false;
+                                        _this3.deleteable = {};
                                     }
                                 }).catch(function (err) {
                                     alert(err);
@@ -90844,8 +90840,53 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee4, this);
             }));
 
-            function saveProduct(_x5) {
+            function confirmDeleteItem() {
                 return _ref4.apply(this, arguments);
+            }
+
+            return confirmDeleteItem;
+        }(),
+        closeEditDialog: function closeEditDialog(response) {
+            this.showEditDialog = false;
+        },
+        saveProduct: function () {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(product) {
+                var _this4 = this;
+
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                this.showEditDialog = false;
+
+                                this.loading = true;
+
+                                _context5.next = 4;
+                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/products/' + product.id, product).then(function (response) {
+                                    if (response.status === 200) {
+                                        _this4.loading = false;
+                                    } else {
+                                        alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
+                                        _this4.loading = false;
+                                    }
+                                }).catch(function (err) {
+                                    alert(err);
+                                });
+
+                            case 4:
+                                response = _context5.sent;
+
+                            case 5:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function saveProduct(_x5) {
+                return _ref5.apply(this, arguments);
             }
 
             return saveProduct;
