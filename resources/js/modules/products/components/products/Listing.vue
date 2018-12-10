@@ -6,6 +6,7 @@
                 <span class="headline">{{ 'Products' | translate }}</span>
                 <v-spacer></v-spacer>
                 <v-text-field
+                    class="search-filter"
                     v-model="filter" 
                     append-icon="search"
                     label="Filter"
@@ -158,5 +159,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+.search-filter {
+    padding-top: 0;
+    margin-top: 0;
+}
 </style>

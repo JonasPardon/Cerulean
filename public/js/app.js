@@ -88676,7 +88676,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.search-filter[data-v-03e50ded] {\n  padding-top: 0;\n  margin-top: 0;\n}\n", ""]);
 
 // exports
 
@@ -88699,6 +88699,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -89424,6 +89425,7 @@ var render = function() {
               _c("v-spacer"),
               _vm._v(" "),
               _c("v-text-field", {
+                staticClass: "search-filter",
                 attrs: {
                   "append-icon": "search",
                   label: "Filter",
