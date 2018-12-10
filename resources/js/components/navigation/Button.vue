@@ -1,7 +1,6 @@
 <template>
     <v-list-tile :to="{ name: menuItem.route }">
 
-
         <v-list-tile-content>
             <v-list-tile-title>
                 {{ menuItem.label }}
@@ -9,9 +8,9 @@
         </v-list-tile-content>
 
         <v-list-tile-action>
-            <v-icon>{{ menuItem.icon }}</v-icon>
+            <v-icon color="main">{{ menuItem.icon }}</v-icon>
         </v-list-tile-action>
-        
+
     </v-list-tile>
 </template>
 

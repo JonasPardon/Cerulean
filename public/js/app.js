@@ -41886,8 +41886,9 @@ __webpack_require__(144);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a, {
     theme: {
-        main: '#34495e',
-        accent: '#34495e'
+        primary: '#085078',
+        main: '#085078',
+        accent: '#77A1D3'
     }
 });
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
@@ -89929,23 +89930,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 // components
 
@@ -90078,6 +90062,7 @@ exports.push([module.i, "\n.navigation-drawer .expansion-panel {\n  -webkit-box-
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Button__);
+//
 //
 //
 //
@@ -90280,7 +90265,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -90317,7 +90301,11 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-list-tile-action",
-        [_c("v-icon", [_vm._v(_vm._s(_vm.menuItem.icon))])],
+        [
+          _c("v-icon", { attrs: { color: "main" } }, [
+            _vm._v(_vm._s(_vm.menuItem.icon))
+          ])
+        ],
         1
       )
     ],
@@ -90352,7 +90340,8 @@ var render = function() {
           attrs: {
             "no-action": "",
             value: _vm.shouldBeExpanded,
-            "prepend-icon": _vm.menuItem.icon
+            "prepend-icon": _vm.menuItem.icon,
+            color: "main"
           }
         },
         [

@@ -30,8 +30,9 @@ import routes from './routes';
 
 Vue.use(Vuetify, {
     theme: {
-        main: '#34495e',
-        accent: '#34495e',
+        primary: '#085078',
+        main: '#085078',
+        accent: '#77A1D3',
     }
 });
 Vue.use(VueRouter);

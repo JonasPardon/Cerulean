@@ -15,23 +15,6 @@
                 :key="index"
                 :menuItem="item" />
 
-            <!-- <v-list-tile 
-                v-for="navItem in menuItems" 
-                :key='navItem.name'
-                @click='navItemClick(navItem)' >
-
-                <v-list-tile-action>
-                    <v-icon>
-                        {{ navItem.icon }}
-                    </v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title>
-                        {{ navItem.label }}
-                    </v-list-tile-title>
-                </v-list-tile-content>
-
-            </v-list-tile> -->
       </v-list>
     </v-navigation-drawer>
 </template>

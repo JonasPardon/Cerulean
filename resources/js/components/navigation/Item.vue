@@ -10,7 +10,8 @@
         v-else
         no-action
         :value="shouldBeExpanded"
-        :prepend-icon="menuItem.icon">
+        :prepend-icon="menuItem.icon"
+        color="main" >
 
         <v-list-tile
             slot="activator">
