@@ -22,10 +22,18 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
 
 import Core from './components/Core';
 
+import routes from './routes';
+
 Vue.use(Vuetify);
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    routes
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,4 +46,5 @@ const app = new Vue({
     components: {
         'home-component': Core
     },
+    router
 });

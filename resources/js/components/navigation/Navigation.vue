@@ -9,10 +9,16 @@
                 <!-- <div style="margin: 10%;" v-html="require(`./../../assets/laravel_logo.png`)" ></div> -->
                 <img src="./../../assets/laravel_logo.png" alt="Logo">
             </div>
-            <v-list-tile 
-                v-for="navItem in navItems" 
+
+            <nav-item
+                v-for="(item, index) in menuItems"
+                :key="index"
+                :menuItem="item" />
+
+            <!-- <v-list-tile 
+                v-for="navItem in menuItems" 
                 :key='navItem.name'
-                @click='navItemClick(navItem.name)' >
+                @click='navItemClick(navItem)' >
 
                 <v-list-tile-action>
                     <v-icon>
@@ -25,18 +31,22 @@
                     </v-list-tile-title>
                 </v-list-tile-content>
 
-            </v-list-tile>
+            </v-list-tile> -->
       </v-list>
     </v-navigation-drawer>
 </template>
 
 <script>
-import navItems from './../../navigation';
+// components
+import NavItem from './Item';
+
+// variables
+import menuItems from './../../navigation';
 
 export default {
     name: 'navigation',
     components: {
-        
+        'nav-item': NavItem,
     },
     props: {
         drawer: {
@@ -45,15 +55,15 @@ export default {
     },
     data() {
         return {
-            navItems: navItems
+            menuItems: menuItems
         }
     },
     mounted () {
-        // console.log(navItems);
+        // console.log(menuItems);
     },
     methods: {
         navItemClick(item) {
-            alert(item);
+            alert(item.name);
         }
     }
 }

@@ -11,8 +11,9 @@
           justify-center
         >
           <v-flex xs12>
-            <product-list></product-list>
-            <product-category-list class="mt-5"></product-category-list>
+            <!-- <product-list></product-list>
+            <product-category-list class="mt-5"></product-category-list> -->
+            <router-view></router-view>
           </v-flex>
         </v-layout>
       </v-container>
