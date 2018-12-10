@@ -28,7 +28,12 @@ import Core from './components/Core';
 
 import routes from './routes';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+    theme: {
+        main: '#34495e',
+        accent: '#34495e',
+    }
+});
 Vue.use(VueRouter);
 
 const router = new VueRouter({

@@ -41884,11 +41884,16 @@ __webpack_require__(144);
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a, {
+    theme: {
+        main: '#34495e',
+        accent: '#34495e'
+    }
+});
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
-  routes: __WEBPACK_IMPORTED_MODULE_4__routes__["a" /* default */]
+    routes: __WEBPACK_IMPORTED_MODULE_4__routes__["a" /* default */]
 });
 
 /**
@@ -41898,11 +41903,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
  */
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  el: '#app',
-  components: {
-    'home-component': __WEBPACK_IMPORTED_MODULE_3__components_Core___default.a
-  },
-  router: router
+    el: '#app',
+    components: {
+        'home-component': __WEBPACK_IMPORTED_MODULE_3__components_Core___default.a
+    },
+    router: router
 });
 
 /***/ }),
@@ -90800,6 +90805,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.deleteable = product;
             this.showConfirmDialog = true;
         },
+        addItem: function addItem() {
+            this.editable = {};
+            this.showEditDialog = true;
+        },
         confirmDeleteItem: function () {
             var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
                 var _this3 = this;
@@ -90853,16 +90862,40 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(product) {
                 var _this4 = this;
 
-                var response;
+                var response, _response;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
                     while (1) {
                         switch (_context5.prev = _context5.next) {
                             case 0:
                                 this.showEditDialog = false;
-
                                 this.loading = true;
 
-                                _context5.next = 4;
+                                if (this.editable.id) {
+                                    _context5.next = 8;
+                                    break;
+                                }
+
+                                _context5.next = 5;
+                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/products', product).then(function (response) {
+                                    if (response.status === 201) {
+                                        _this4.loading = false;
+                                        _this4.products.push(response.data.data);
+                                    } else {
+                                        alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
+                                        _this4.loading = false;
+                                    }
+                                }).catch(function (err) {
+                                    alert(err);
+                                });
+
+                            case 5:
+                                response = _context5.sent;
+                                _context5.next = 11;
+                                break;
+
+                            case 8:
+                                _context5.next = 10;
                                 return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/products/' + product.id, product).then(function (response) {
                                     if (response.status === 200) {
                                         _this4.loading = false;
@@ -90874,10 +90907,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     alert(err);
                                 });
 
-                            case 4:
-                                response = _context5.sent;
+                            case 10:
+                                _response = _context5.sent;
 
-                            case 5:
+                            case 11:
                             case 'end':
                                 return _context5.stop();
                         }
@@ -90894,6 +90927,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         formatDate: function formatDate(date) {
             // return moment(date).format('LL');
             return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).calendar();
+            // return date;
         }
     }
 });
@@ -91841,6 +91875,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'product-edit',
@@ -91879,7 +91955,11 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { persistent: "", "max-width": "800px" },
+          attrs: {
+            fullscreen: "",
+            "hide-overlay": "",
+            transition: "dialog-bottom-transition"
+          },
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -91892,196 +91972,294 @@ var render = function() {
           _c(
             "v-card",
             [
-              _c("v-card-title", [
-                _c("span", { staticClass: "headline" }, [
-                  _vm._v("Edit product")
-                ])
-              ]),
-              _vm._v(" "),
               _c(
-                "v-card-text",
+                "v-toolbar",
+                { attrs: { dark: "", color: "main" } },
                 [
                   _c(
-                    "v-container",
-                    { attrs: { "grid-list-md": "" } },
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: { click: _vm.closeDialog }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-toolbar-title", [_vm._v("Product details")]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-toolbar-items",
                     [
                       _c(
-                        "v-layout",
-                        { attrs: { wrap: "" } },
+                        "v-btn",
+                        {
+                          attrs: { dark: "", flat: "" },
+                          on: { click: _vm.saveProduct }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-subheader", [_vm._v("General product information")]),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { "grid-list-xl": "", fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md4: "" } },
                         [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md4: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Name*", required: "" },
-                                model: {
-                                  value: _vm.product.name,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "name", $$v)
-                                  },
-                                  expression: "product.name"
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                          _c("v-text-field", {
+                            attrs: { label: "Name*", required: "" },
+                            model: {
+                              value: _vm.product.name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "name", $$v)
+                              },
+                              expression: "product.name"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md4: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Price*", required: "" },
+                            model: {
+                              value: _vm.product.price_per_unit,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "price_per_unit", $$v)
+                              },
+                              expression: "product.price_per_unit"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md2: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Unit*", required: "" },
+                            model: {
+                              value: _vm.product.unit,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "unit", $$v)
+                              },
+                              expression: "product.unit"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md2: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Currency*", required: "" },
+                            model: {
+                              value: _vm.product.currency,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "currency", $$v)
+                              },
+                              expression: "product.currency"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md2: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Weight*", required: "" },
+                            model: {
+                              value: _vm.product.weight,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "weight", $$v)
+                              },
+                              expression: "product.weight"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md2: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Weight unit*", required: "" },
+                            model: {
+                              value: _vm.product.weight_unit,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "weight_unit", $$v)
+                              },
+                              expression: "product.weight_unit"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "", md2: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Stock*", required: "" },
+                            model: {
+                              value: _vm.product.stock,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "stock", $$v)
+                              },
+                              expression: "product.stock"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "" } },
+                        [
+                          _c("v-combobox", {
+                            attrs: {
+                              items: [
+                                "Category one",
+                                "Category two",
+                                "Category three"
+                              ],
+                              "item-text": "name",
+                              "item-value": "id",
+                              label: "Product categories",
+                              chips: "",
+                              clearable: "",
+                              multiple: ""
+                            },
+                            model: {
+                              value: _vm.product.categories,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "categories", $$v)
+                              },
+                              expression: "product.categories"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c("v-textarea", {
+                            attrs: { label: "Description" },
+                            model: {
+                              value: _vm.product.description,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "description", $$v)
+                              },
+                              expression: "product.description"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "" } },
+                        [
+                          _c("v-textarea", {
+                            attrs: { label: "Short Description" },
+                            model: {
+                              value: _vm.product.short_description,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "short_description", $$v)
+                              },
+                              expression: "product.short_description"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm6: "" } },
+                        [
+                          _c("v-textarea", {
+                            attrs: { label: "Extra Description" },
+                            model: {
+                              value: _vm.product.extra_description,
+                              callback: function($$v) {
+                                _vm.$set(_vm.product, "extra_description", $$v)
+                              },
+                              expression: "product.extra_description"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("small", [_vm._v("*indicates required field")]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-list",
+                { attrs: { "three-line": "", subheader: "" } },
+                [
+                  _c("v-subheader", [_vm._v("General")]),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-tile",
+                    { attrs: { avatar: "" } },
+                    [
+                      _c("v-list-tile-action", [_c("v-checkbox")], 1),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-tile-content",
+                        [
+                          _c("v-list-tile-title", [_vm._v("Notifications")]),
                           _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md4: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Price*", required: "" },
-                                model: {
-                                  value: _vm.product.price_per_unit,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "price_per_unit", $$v)
-                                  },
-                                  expression: "product.price_per_unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Unit*", required: "" },
-                                model: {
-                                  value: _vm.product.unit,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "unit", $$v)
-                                  },
-                                  expression: "product.unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Currency*", required: "" },
-                                model: {
-                                  value: _vm.product.currency,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "currency", $$v)
-                                  },
-                                  expression: "product.currency"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Weight*", required: "" },
-                                model: {
-                                  value: _vm.product.weight,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "weight", $$v)
-                                  },
-                                  expression: "product.weight"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Weight unit*", required: "" },
-                                model: {
-                                  value: _vm.product.weight_unit,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "weight_unit", $$v)
-                                  },
-                                  expression: "product.weight_unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Stock*", required: "" },
-                                model: {
-                                  value: _vm.product.stock,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "stock", $$v)
-                                  },
-                                  expression: "product.stock"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-combobox", {
-                                attrs: {
-                                  items: [
-                                    "Category one",
-                                    "Category two",
-                                    "Category three"
-                                  ],
-                                  "item-text": "name",
-                                  "item-value": "id",
-                                  label: "Product categories",
-                                  chips: "",
-                                  clearable: "",
-                                  multiple: ""
-                                },
-                                model: {
-                                  value: _vm.product.categories,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "categories", $$v)
-                                  },
-                                  expression: "product.categories"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-textarea", {
-                                attrs: { label: "Description" },
-                                model: {
-                                  value: _vm.product.description,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.product, "description", $$v)
-                                  },
-                                  expression: "product.description"
-                                }
-                              })
-                            ],
-                            1
-                          )
+                          _c("v-list-tile-sub-title", [
+                            _vm._v(
+                              "Notify me about updates to apps or games that I downloaded"
+                            )
+                          ])
                         ],
                         1
                       )
@@ -92089,32 +92267,48 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("small", [_vm._v("*indicates required field")])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c("v-spacer"),
-                  _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "blue darken-1", flat: "" },
-                      on: { click: _vm.closeDialog }
-                    },
-                    [_vm._v("Close")]
+                    "v-list-tile",
+                    { attrs: { avatar: "" } },
+                    [
+                      _c("v-list-tile-action", [_c("v-checkbox")], 1),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-tile-content",
+                        [
+                          _c("v-list-tile-title", [_vm._v("Sound")]),
+                          _vm._v(" "),
+                          _c("v-list-tile-sub-title", [
+                            _vm._v(
+                              "Auto-update apps at any time. Data charges may apply"
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "blue darken-1", flat: "" },
-                      on: { click: _vm.saveProduct }
-                    },
-                    [_vm._v("Save")]
+                    "v-list-tile",
+                    { attrs: { avatar: "" } },
+                    [
+                      _c("v-list-tile-action", [_c("v-checkbox")], 1),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-tile-content",
+                        [
+                          _c("v-list-tile-title", [_vm._v("Auto-add widgets")]),
+                          _vm._v(" "),
+                          _c("v-list-tile-sub-title", [
+                            _vm._v("Automatically add home screen widgets")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -92447,7 +92641,11 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { staticClass: "ml-3", attrs: { color: "info", flat: "" } },
+                {
+                  staticClass: "ml-3",
+                  attrs: { color: "accent", flat: "" },
+                  on: { click: _vm.addItem }
+                },
                 [
                   _c("v-icon", [_vm._v("add")]),
                   _vm._v("\n                    Add\n                ")
@@ -93580,7 +93778,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "indigo", dark: "", fixed: "", app: "" } },
+        { attrs: { color: "main", dark: "", fixed: "", app: "" } },
         [
           _c("v-toolbar-side-icon", {
             on: {
@@ -93616,7 +93814,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-footer", { attrs: { color: "indigo", app: "" } }, [
+      _c("v-footer", { attrs: { color: "main", app: "" } }, [
         _c("span", { staticClass: "white--text" }, [_vm._v("© Laravel ERP")]),
         _vm._v(" "),
         _c("span", { staticClass: "white--text" }, [

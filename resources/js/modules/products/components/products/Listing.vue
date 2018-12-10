@@ -14,8 +14,9 @@
                     hide-details />
                 <v-btn
                     class="ml-3"
-                    color="info"
-                    flat>
+                    color="accent"
+                    flat
+                    @click='addItem'>
                     <v-icon>add</v-icon>
                     Add
                 </v-btn>
@@ -72,7 +73,6 @@
 
         </confirm>
     </div>
-
 </template>
 
 <script>
@@ -147,6 +147,10 @@
                 this.deleteable = product;
                 this.showConfirmDialog = true;
             },
+            addItem() {
+                this.editable = {};
+                this.showEditDialog = true;
+            },
             async confirmDeleteItem(){
                 this.showConfirmDialog = false;
                 this.loading = true;
@@ -174,27 +178,45 @@
             },
             async saveProduct(product) {
                 this.showEditDialog = false;
-
                 this.loading = true;
 
-                const response = await axios.patch(
-                    `/api/products/${product.id}`,
-                    product
-                    ).then(response => {
-                        if(response.status === 200) {
-                            this.loading = false;
-                        }else{
-                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
-                            this.loading = false;
-                        }
-                    })
-                    .catch(err => {
-                        alert(err);
-                    });
+                if (!this.editable.id) {
+                     const response = await axios.post(
+                        `/api/products`,
+                        product
+                        ).then(response => {
+                            if(response.status === 201) {
+                                this.loading = false;
+                                this.products.push(response.data.data);
+                            }else{
+                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
+                                this.loading = false;
+                            }
+                        })
+                        .catch(err => {
+                            alert(err);
+                        });
+                } else {
+                    const response = await axios.patch(
+                        `/api/products/${product.id}`,
+                        product
+                        ).then(response => {
+                            if(response.status === 200) {
+                                this.loading = false;
+                            }else{
+                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
+                                this.loading = false;
+                            }
+                        })
+                        .catch(err => {
+                            alert(err);
+                        });
+                }
             },
             formatDate(date) {
                 // return moment(date).format('LL');
                 return moment(date).calendar();
+                // return date;
             }
         }
     }

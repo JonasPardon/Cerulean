@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <navigation :drawer='drawer' />
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="main" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Laravel ERP</v-toolbar-title>
     </v-toolbar>
@@ -18,7 +18,7 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer color="indigo" app>
+    <v-footer color="main" app>
       <span class="white--text">&copy; Laravel ERP</span>
       <span class=white--text> | Version: 0.0.1</span>
     </v-footer>
