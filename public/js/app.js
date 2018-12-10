@@ -89753,6 +89753,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -93803,13 +93804,22 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-footer", { attrs: { color: "main", app: "" } }, [
-        _c("span", { staticClass: "white--text" }, [_vm._v("© Laravel ERP")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "white--text" }, [
-          _vm._v(" | Version: 0.0.1")
-        ])
-      ])
+      _c(
+        "v-footer",
+        { attrs: { color: "main", app: "" } },
+        [
+          _c("span", { staticClass: "white--text pl-2" }, [
+            _vm._v("© Laravel ERP")
+          ]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("span", { staticClass: "white--text pr-2" }, [
+            _vm._v("Version: 0.0.1")
+          ])
+        ],
+        1
+      )
     ],
     1
   )

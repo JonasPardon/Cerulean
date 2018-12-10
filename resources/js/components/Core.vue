@@ -19,8 +19,9 @@
       </v-container>
     </v-content>
     <v-footer color="main" app>
-      <span class="white--text">&copy; Laravel ERP</span>
-      <span class=white--text> | Version: 0.0.1</span>
+      <span class="white--text pl-2">&copy; Laravel ERP</span>
+      <v-spacer></v-spacer>
+      <span class="white--text pr-2">Version: 0.0.1</span>
     </v-footer>
   </v-app>
 </template>
