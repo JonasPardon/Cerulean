@@ -13,7 +13,9 @@
           <v-flex xs12>
             <!-- <product-list></product-list>
             <product-category-list class="mt-5"></product-category-list> -->
-            <router-view></router-view>
+            <v-scroll-y-transition leave-absolute hide-on-leave>
+              <router-view></router-view>
+            </v-scroll-y-transition>
           </v-flex>
         </v-layout>
       </v-container>
