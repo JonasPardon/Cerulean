@@ -39,6 +39,12 @@ const nav = [
                 route: 'crm_placeholder'
             }
         ],
+    },
+    {
+        name: 'sales',
+        label: 'Sales',
+        icon: 'shopping_cart',
+        route: 'sales_placeholder'
     }
 ];
 
