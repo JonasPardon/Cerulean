@@ -1,5 +1,5 @@
-# Laravel ERP
-Yeah I'll fill this in soon I guess.
+# Cerulean
+Cerulean is a web-based ERP package, made with Laravel and VueJs.
 
 ## Getting started
 

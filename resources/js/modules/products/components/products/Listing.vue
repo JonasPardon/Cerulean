@@ -3,7 +3,7 @@
     <div>
         <v-card>
             <v-card-title>
-                <span class="headline">{{ 'Products' | translate }}</span>
+                <span class="headline">Products</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     class="search-filter"
@@ -14,8 +14,9 @@
                     hide-details />
                 <v-btn
                     class="ml-3"
-                    color="info"
-                    flat>
+                    color="accent"
+                    flat
+                    @click='addItem'>
                     <v-icon>add</v-icon>
                     Add
                 </v-btn>
@@ -60,19 +61,32 @@
             :product='editable'
             @close='closeEditDialog'
             @save='saveProduct' />
-    </div>
 
+        <confirm
+            v-model="showConfirmDialog"
+            :condition='showConfirmDialog'
+            title="Product delete"
+            @cancel='showConfirmDialog = false'
+            @confirm='confirmDeleteItem' >
+
+            <div class="body-1">Are you sure you want delete this product?</div>
+
+        </confirm>
+    </div>
 </template>
 
 <script>
     import axios from 'axios';
-    import Edit from './Edit';
     import moment from 'moment';
+    
+    import Edit from './Edit';
+    import Confirm from './../../../../components/generic/confirm/Confirm';
 
     export default {
         name: 'home-component',
         components: {
             'product-edit': Edit,
+            'confirm': Confirm,
         },
         data() {
             return {
@@ -85,13 +99,15 @@
                     { text: 'Stock', value: 'stock' },
                     { text: 'Created', value: 'created_at' },
                     { text: 'Updated', value: 'updated_at' },
-                    { text: 'Actions', value: '', align: 'right'}
+                    { text: '', value: '', align: 'right', sortable: false}
                 ],
                 products: [],
                 links: {},
                 loading: false,
                 editable: {},
+                deleteable: {},
                 showEditDialog: false,
+                showConfirmDialog: false,
                 filter: null,
             }
         },
@@ -127,32 +143,80 @@
                 this.editable = product;
                 this.showEditDialog = true;
             },
-            closeEditDialog(response) {
-                this.showEditDialog = false;
+            deleteItem(product){
+                this.deleteable = product;
+                this.showConfirmDialog = true;
             },
-            async saveProduct(product) {
-                this.showEditDialog = false;
-
+            addItem() {
+                this.editable = {};
+                this.showEditDialog = true;
+            },
+            async confirmDeleteItem(){
+                this.showConfirmDialog = false;
                 this.loading = true;
 
-                const response = await axios.patch(
-                    `/api/products/${product.id}`,
-                    product
-                    ).then(response => {
+                const response = await axios.delete(`api/products/${this.deleteable.id}`)
+                    .then(response => {
                         if(response.status === 200) {
                             this.loading = false;
-                        }else{
-                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`)
+                            this.products = this.products.filter(product => {
+                                return product.id !== this.deleteable.id;
+                            });
+                            this.deleteable = {};
+                        } else {
+                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
                             this.loading = false;
+                            this.deleteable = {};
                         }
                     })
                     .catch(err => {
                         alert(err);
                     });
             },
+            closeEditDialog(response) {
+                this.showEditDialog = false;
+            },
+            async saveProduct(product) {
+                this.showEditDialog = false;
+                this.loading = true;
+
+                if (!this.editable.id) {
+                     const response = await axios.post(
+                        `/api/products`,
+                        product
+                        ).then(response => {
+                            if(response.status === 201) {
+                                this.loading = false;
+                                this.products.push(response.data.data);
+                            }else{
+                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
+                                this.loading = false;
+                            }
+                        })
+                        .catch(err => {
+                            alert(err);
+                        });
+                } else {
+                    const response = await axios.patch(
+                        `/api/products/${product.id}`,
+                        product
+                        ).then(response => {
+                            if(response.status === 200) {
+                                this.loading = false;
+                            }else{
+                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
+                                this.loading = false;
+                            }
+                        })
+                        .catch(err => {
+                            alert(err);
+                        });
+                }
+            },
             formatDate(date) {
                 // return moment(date).format('LL');
                 return moment(date).calendar();
+                // return date;
             }
         }
     }

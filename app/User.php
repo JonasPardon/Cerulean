@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'middle_names',
+        'last_name',
+        'nickname', 
+        'email', 
+        'phone_number',
+        'password',
+        'birthday',
+        'address_street',
+        'address_number',
+        'address_postal_code',
+        'address_city',
+        'country',
+        'gender',
+
     ];
 
     /**
@@ -25,6 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
     ];
 }
