@@ -3,7 +3,7 @@
     <navigation :drawer='drawer' />
     <v-toolbar color="main" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Laravel ERP</v-toolbar-title>
+      <v-toolbar-title>Cerulean</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
@@ -21,7 +21,7 @@
       </v-container>
     </v-content>
     <v-footer color="main" app>
-      <span class="white--text pl-2">&copy; Laravel ERP</span>
+      <span class="white--text pl-2">&copy; Cerulean</span>
       <v-spacer></v-spacer>
       <span class="white--text pr-2">Version: 0.0.1</span>
     </v-footer>

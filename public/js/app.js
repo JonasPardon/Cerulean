@@ -94031,7 +94031,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("Laravel ERP")])
+          _c("v-toolbar-title", [_vm._v("Cerulean")])
         ],
         1
       ),
@@ -94077,7 +94077,7 @@ var render = function() {
         { attrs: { color: "main", app: "" } },
         [
           _c("span", { staticClass: "white--text pl-2" }, [
-            _vm._v("© Laravel ERP")
+            _vm._v("© Cerulean")
           ]),
           _vm._v(" "),
           _c("v-spacer"),
