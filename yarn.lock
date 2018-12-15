@@ -5725,6 +5725,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-apexcharts@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/vue-apexcharts/-/vue-apexcharts-1.2.7.tgz#8f124d0422b0572869db8d4cbebe8eb8e25bbe70"
+  integrity sha512-Zp7dh1S2i4a1kkzIzHlDlTplwblYDtmxBX68IxiJGTeGNmziqZN6Zlg4DHgEb8FnKyhIDfED9/UadD20kFtz6g==
+
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
