@@ -2,13 +2,23 @@
     <div>
         DASHBOARD
         <v-layout fluid>
-            <v-flex xs12 sm6 md3>
+            <v-flex xs12 sm6 md3 class="ma-2">
                 <v-card>
                     <v-card-title>
                         Bar chart
                     </v-card-title>
                     <v-card-text>
-                        <apex-chart width="500" type="bar" :options="charts[0].options" :series="charts[0].options.series"></apex-chart>
+                        <apex-chart type="bar" :options="charts[0].options" :series="charts[0].options.series"></apex-chart>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+            <v-flex xs12 sm6 md3 class="ma-2">
+                <v-card>
+                    <v-card-title>
+                        Donut chart
+                    </v-card-title>
+                    <v-card-text>
+                        <apex-chart type="donut" :options="charts[1].options" :series="charts[1].options.series"></apex-chart>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -44,6 +54,13 @@ export default {
                         xaxis: {
                             categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
                         }
+                    }
+                },
+                {
+                    options: {
+                        series: [
+                            44, 55, 41, 17, 15
+                        ]
                     }
                 }
             ]

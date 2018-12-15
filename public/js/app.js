@@ -94294,6 +94294,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -94320,6 +94330,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     xaxis: {
                         categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
                     }
+                }
+            }, {
+                options: {
+                    series: [44, 55, 41, 17, 15]
                 }
             }]
         };
@@ -94350,7 +94364,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm6: "", md3: "" } },
+            { staticClass: "ma-2", attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
                 "v-card",
@@ -94366,10 +94380,42 @@ var render = function() {
                     [
                       _c("apex-chart", {
                         attrs: {
-                          width: "500",
                           type: "bar",
                           options: _vm.charts[0].options,
                           series: _vm.charts[0].options.series
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { staticClass: "ma-2", attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _vm._v(
+                      "\n                        Donut chart\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c("apex-chart", {
+                        attrs: {
+                          type: "donut",
+                          options: _vm.charts[1].options,
+                          series: _vm.charts[1].options.series
                         }
                       })
                     ],
