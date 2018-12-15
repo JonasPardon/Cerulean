@@ -1,5 +1,11 @@
 const nav = [
     {
+        name: 'dashboard',
+        label: 'Dashboard',
+        icon: 'dashboard',
+        route: 'dashboard',
+    },
+    {
         name: 'inventory',
         label: 'Inventory',
         icon: 'assignment',

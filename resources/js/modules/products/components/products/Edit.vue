@@ -14,7 +14,7 @@
         </v-toolbar>
         <!-- <v-list three-line subheader> -->
           <v-subheader>General product information</v-subheader>
-           <v-container grid-list-xl fluid>
+           <v-container grid-list-xl>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
                 <v-text-field label="Name*" required v-model="product.name"></v-text-field>

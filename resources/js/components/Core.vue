@@ -11,8 +11,6 @@
           justify-center
         >
           <v-flex xs12>
-            <!-- <product-list></product-list>
-            <product-category-list class="mt-5"></product-category-list> -->
             <v-scroll-y-transition leave-absolute hide-on-leave>
               <router-view></router-view>
             </v-scroll-y-transition>
@@ -50,3 +48,11 @@
     }
   }
 </script>
+
+<style lang="scss">
+
+:focus {
+  outline: none;
+}
+
+</style>

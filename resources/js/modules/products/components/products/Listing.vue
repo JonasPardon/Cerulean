@@ -47,9 +47,9 @@
                         <v-icon small class='mr-2' @click="deleteItem(props.item)">
                             delete
                         </v-icon>
-                        <v-icon small class='mr-2'>
+                        <!-- <v-icon small class='mr-2'>
                             visibility
-                        </v-icon>
+                        </v-icon> -->
                     </td>
                 </template>
             </v-data-table>
