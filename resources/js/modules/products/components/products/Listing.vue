@@ -59,7 +59,7 @@
                     { text: 'Unit', value: 'unit' },
                     { text: 'Weight', value: 'weight' },
                     { text: 'Stock', value: 'stock' },
-                    { text: 'Created', value: 'created_at.date', type: 'date' },
+                    // { text: 'Created', value: 'created_at.date', type: 'date' },
                     { text: 'Updated', value: 'updated_at.date', type: 'date' },
                 ],
                 products: [],

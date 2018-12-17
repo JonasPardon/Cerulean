@@ -90749,7 +90749,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at.date', type: 'date' }, { text: 'Updated', value: 'updated_at.date', type: 'date' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' },
+            // { text: 'Created', value: 'created_at.date', type: 'date' },
+            { text: 'Updated', value: 'updated_at.date', type: 'date' }],
             products: [],
             links: {},
             loading: false,
@@ -92989,7 +92991,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Created', value: 'created_at.date', type: 'date' }, { text: 'Updated', value: 'updated_at.date', type: 'date' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' },
+            // { text: 'Created', value: 'created_at.date', type: 'date' },
+            { text: 'Updated', value: 'updated_at.date', type: 'date' }],
             categories: [],
             links: {},
             loading: false,
