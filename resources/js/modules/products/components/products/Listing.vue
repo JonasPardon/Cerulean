@@ -39,7 +39,7 @@
 
     import API from './../../../api';
     
-    import Edit from './Edit';
+    import Edit from './Edit-small';
     import Confirm from './../../../../components/generic/confirm/Confirm';
     import MasterDatatable from './../../../../components/generic/datatable/Master';
 
