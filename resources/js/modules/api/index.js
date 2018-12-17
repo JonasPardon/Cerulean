@@ -30,6 +30,21 @@ const methods = {
             }
         });
     },
+    async patch(entity, identifier, object) {
+        const patchUrl = `${baseUrl}/${entity}/${identifier}`;
+
+        return new Promise(async (resolve, reject) => {
+            const response = await axios.patch(
+                patchUrl,
+                object
+            );
+            if(response.status === 200) {
+                return resolve(response.data.data);
+            } else {
+                return reject(response.statusText);
+            }
+        });
+    }
 }
 
 export default methods;

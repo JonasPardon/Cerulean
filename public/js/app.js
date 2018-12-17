@@ -95016,6 +95016,66 @@ var methods = {
         }
 
         return post;
+    }(),
+    patch: function () {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(entity, identifier, object) {
+            var _this3 = this;
+
+            var patchUrl;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+                while (1) {
+                    switch (_context6.prev = _context6.next) {
+                        case 0:
+                            patchUrl = baseUrl + '/' + entity + '/' + identifier;
+                            return _context6.abrupt('return', new Promise(function () {
+                                var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(resolve, reject) {
+                                    var response;
+                                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                                        while (1) {
+                                            switch (_context5.prev = _context5.next) {
+                                                case 0:
+                                                    _context5.next = 2;
+                                                    return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch(patchUrl, object);
+
+                                                case 2:
+                                                    response = _context5.sent;
+
+                                                    if (!(response.status === 200)) {
+                                                        _context5.next = 7;
+                                                        break;
+                                                    }
+
+                                                    return _context5.abrupt('return', resolve(response.data.data));
+
+                                                case 7:
+                                                    return _context5.abrupt('return', reject(response.statusText));
+
+                                                case 8:
+                                                case 'end':
+                                                    return _context5.stop();
+                                            }
+                                        }
+                                    }, _callee5, _this3);
+                                }));
+
+                                return function (_x12, _x13) {
+                                    return _ref6.apply(this, arguments);
+                                };
+                            }()));
+
+                        case 2:
+                        case 'end':
+                            return _context6.stop();
+                    }
+                }
+            }, _callee6, this);
+        }));
+
+        function patch(_x9, _x10, _x11) {
+            return _ref5.apply(this, arguments);
+        }
+
+        return patch;
     }()
 };
 
