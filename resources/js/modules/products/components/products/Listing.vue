@@ -109,8 +109,8 @@
                     { text: 'Unit', value: 'unit' },
                     { text: 'Weight', value: 'weight' },
                     { text: 'Stock', value: 'stock' },
-                    { text: 'Created', value: 'created_at' },
-                    { text: 'Updated', value: 'updated_at' },
+                    { text: 'Created', value: 'created_at.date' },
+                    { text: 'Updated', value: 'updated_at.date' },
                     // { text: '', value: '', align: 'right', sortable: false}
                 ],
                 products: [],

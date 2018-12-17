@@ -90799,7 +90799,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at' }, { text: 'Updated', value: 'updated_at' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at.date' }, { text: 'Updated', value: 'updated_at.date' }],
             products: [],
             links: {},
             loading: false,
@@ -95199,6 +95199,7 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_dashGet__ = __webpack_require__(251);
 //
 //
 //
@@ -95245,21 +95246,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'c-datatable',
@@ -95300,6 +95288,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        dashGet: __WEBPACK_IMPORTED_MODULE_0__lib_dashGet__["a" /* default */],
         editItem: function editItem(item) {
             this.$emit('edit', item);
         },
@@ -95352,11 +95341,13 @@ var render = function() {
                   _vm._l(_vm.$props.headers, function(header) {
                     return _c("td", { key: header.value }, [
                       _vm._v(
-                        "\n                    \n                    " +
+                        "\n                    " +
                           _vm._s(
-                            _vm.isNumber(item[header.value])
-                              ? _vm.toLocalNumber(item[header.value])
-                              : item[header.value]
+                            _vm.isNumber(_vm.dashGet(item, header.value))
+                              ? _vm.toLocalNumber(
+                                  _vm.dashGet(item, header.value)
+                                )
+                              : _vm.dashGet(item, header.value)
                           ) +
                           "\n\n                "
                       )
@@ -95536,6 +95527,20 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-67ab8a90", module.exports)
   }
 }
+
+/***/ }),
+/* 251 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function (obj, path, fallback) {
+  if (!obj || !path) return fallback;
+  return (Array.isArray(path) ? path : path.split(".")).reduce(function (acc, path) {
+    if (acc === undefined) return fallback;
+    var value = acc[path];
+    return value !== undefined ? value : fallback;
+  }, obj);
+});
 
 /***/ })
 /******/ ]);
