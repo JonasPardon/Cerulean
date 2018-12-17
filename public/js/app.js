@@ -90749,7 +90749,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at.date' }, { text: 'Updated', value: 'updated_at.date' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at.date', type: 'date' }, { text: 'Updated', value: 'updated_at.date', type: 'date' }],
             products: [],
             links: {},
             loading: false,
@@ -92989,7 +92989,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Created', value: 'created_at.date' }, { text: 'Updated', value: 'updated_at.date' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Created', value: 'created_at.date', type: 'date' }, { text: 'Updated', value: 'updated_at.date', type: 'date' }],
             categories: [],
             links: {},
             loading: false,
@@ -94922,7 +94922,9 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_dashGet__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_dashGet__ = __webpack_require__(251);
 //
 //
 //
@@ -94969,6 +94971,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -95011,7 +95021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        dashGet: __WEBPACK_IMPORTED_MODULE_0__lib_dashGet__["a" /* default */],
+        dashGet: __WEBPACK_IMPORTED_MODULE_1__lib_dashGet__["a" /* default */],
         editItem: function editItem(item) {
             this.$emit('edit', item);
         },
@@ -95023,6 +95033,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         toLocalNumber: function toLocalNumber(value) {
             return value.toLocaleString('be-NL', { maximumSignificantDigits: 5 });
+        },
+        formatDate: function formatDate(date) {
+            // return moment(date).format('LL');
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).calendar();
+            // return date;
         }
     }
 });
@@ -95063,17 +95078,31 @@ var render = function() {
                 [
                   _vm._l(_vm.$props.headers, function(header) {
                     return _c("td", { key: header.value }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.isNumber(_vm.dashGet(item, header.value))
-                              ? _vm.toLocalNumber(
-                                  _vm.dashGet(item, header.value)
-                                )
-                              : _vm.dashGet(item, header.value)
-                          ) +
-                          "\n\n                "
-                      )
+                      header.type == "date"
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.formatDate(
+                                    _vm.dashGet(item, header.value)
+                                  )
+                                ) +
+                                "\n                    "
+                            )
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.isNumber(_vm.dashGet(item, header.value))
+                                    ? _vm.toLocalNumber(
+                                        _vm.dashGet(item, header.value)
+                                      )
+                                    : _vm.dashGet(item, header.value)
+                                ) +
+                                "\n                    "
+                            )
+                          ])
                     ])
                   }),
                   _vm._v(" "),

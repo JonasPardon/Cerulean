@@ -12,7 +12,13 @@
             <tr>
                 <td v-for="header in $props.headers"
                     :key="header.value" >
-                    {{ isNumber(dashGet(item, header.value)) ? toLocalNumber(dashGet(item, header.value)) : dashGet(item, header.value) }}
+
+                    <span v-if="header.type == 'date'">
+                        {{ formatDate(dashGet(item, header.value)) }}
+                    </span>
+                    <span v-else>
+                        {{ isNumber(dashGet(item, header.value)) ? toLocalNumber(dashGet(item, header.value)) : dashGet(item, header.value) }}
+                    </span>
 
                 </td>
                 <td v-if="crud" align="right">
@@ -45,6 +51,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 import dashGet from './../../../lib/dashGet';
 
 export default {
@@ -102,6 +110,11 @@ export default {
         toLocalNumber(value) {
             return value.toLocaleString('be-NL', { maximumSignificantDigits: 5 });
         },
+        formatDate(date) {
+            // return moment(date).format('LL');
+            return moment(date).calendar();
+            // return date;
+        }
     }
 }
 </script>

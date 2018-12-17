@@ -43,8 +43,8 @@
                 headers: [
                     { text: 'ID', value: 'id' },
                     { text: 'Name', value: 'name' },
-                    { text: 'Created', value: 'created_at.date' },
-                    { text: 'Updated', value: 'updated_at.date' },
+                    { text: 'Created', value: 'created_at.date', type: 'date' },
+                    { text: 'Updated', value: 'updated_at.date', type: 'date' },
                 ],
                 categories: [],
                 links: {},
