@@ -90538,25 +90538,14 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var nav = [{
-    name: 'dashboard',
-    label: 'Dashboard',
-    icon: 'dashboard',
-    route: 'dashboard'
-}, {
-    name: 'inventory',
-    label: 'Inventory',
-    icon: 'assignment',
-    children: [{
-        name: 'products.all',
-        label: 'Products',
-        route: 'products.all'
-    }, {
-        name: 'products.categories',
-        label: 'Product categories',
-        route: 'products.categories'
-    }]
-}, {
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_dashboard_navigation__ = __webpack_require__(238);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_products_navigation__ = __webpack_require__(239);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+
+var nav = [].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_0__modules_dashboard_navigation__["a" /* default */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_1__modules_products_navigation__["a" /* default */]), [{
     name: 'crm',
     label: 'CRM',
     icon: 'whatshot',
@@ -90579,7 +90568,7 @@ var nav = [{
     label: 'Sales',
     icon: 'shopping_cart',
     route: 'sales_placeholder'
-}];
+}]);
 
 /* harmony default export */ __webpack_exports__["a"] = (nav);
 
@@ -94902,6 +94891,42 @@ var routes = [{
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
+
+/***/ }),
+/* 238 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var nav = [{
+    name: 'dashboard',
+    label: 'Dashboard',
+    icon: 'dashboard',
+    route: 'dashboard'
+}];
+
+/* harmony default export */ __webpack_exports__["a"] = (nav);
+
+/***/ }),
+/* 239 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var nav = [{
+    name: 'inventory',
+    label: 'Inventory',
+    icon: 'assignment',
+    children: [{
+        name: 'products.all',
+        label: 'Products',
+        route: 'products.all'
+    }, {
+        name: 'products.categories',
+        label: 'Product categories',
+        route: 'products.categories'
+    }]
+}];
+
+/* harmony default export */ __webpack_exports__["a"] = (nav);
 
 /***/ })
 /******/ ]);
