@@ -1,43 +1,6 @@
 <template>
 
     <div>
-        <!-- <v-card>
-            <v-card-title>
-                <span class="headline">Product categories</span>
-                <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="filter" 
-                    append-icon="search"
-                    label="Filter"
-                    single-line
-                    hide-details />
-            </v-card-title>
-
-            <v-data-table
-                :headers='headers'
-                :items='categories'
-                class="elevation-1" 
-                :loading='loading'
-                :crud='true'
-                :search='filter'
-                :rows-per-page-items="[25, 50, 100, { 'text': 'All (might be slow)', 'value': -1 }]" >
-
-                <template slot='items' slot-scope="props">
-                    <td>{{ props.item.id }}.</td>
-                    <td>{{ props.item.name }}</td>
-                    <td>{{ formatDate(props.item.created_at) }}</td>
-                    <td>{{ formatDate(props.item.updated_at) }}</td>
-                    <td align='right'>
-                        <v-icon small class='mr-2' @click="editCategory(props.item)">
-                            edit
-                        </v-icon>
-                        <v-icon small class='mr-2' @click="deleteCategory(props.item)">
-                            delete
-                        </v-icon>
-                    </td>
-                </template>
-            </v-data-table>
-        </v-card> -->
 
         <master-datatable 
             title="Product categories"
