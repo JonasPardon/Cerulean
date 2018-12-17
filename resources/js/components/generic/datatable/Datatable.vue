@@ -8,26 +8,17 @@
         :search='filter'
         :rows-per-page-items="[25, 50, 100, { 'text': 'All (might be slow)', 'value': -1 }]" >
 
-        <!-- <template slot='items' slot-scope="props">
-            <td>{{ props.item.id }}.</td>
-            <td>{{ props.item.name }}</td>
-            <td>{{ props.item.price_per_unit }}</td>
-            <td>{{ props.item.unit }}</td>
-            <td>{{ props.item.weight }} {{ props.item.weight_unit }}</td>
-            <td>{{ props.item.stock }}</td>
-            <td>{{ formatDate(props.item.created_at.date) }}</td>
-            <td>{{ formatDate(props.item.updated_at.date) }}</td>
-            <td align='right'>
-                
-            </td>
-        </template> -->
-
         <template slot="items" slot-scope="{ item }">
             <tr>
                 <td v-for="header in $props.headers"
                     :key="header.value" >
-                    
-                    {{ isNumber(item[header.value]) ? toLocalNumber(item[header.value]) : item[header.value] }}
+
+                    <span v-if="header.type == 'date'">
+                        {{ formatDate(dashGet(item, header.value)) }}
+                    </span>
+                    <span v-else>
+                        {{ isNumber(dashGet(item, header.value)) ? toLocalNumber(dashGet(item, header.value)) : dashGet(item, header.value) }}
+                    </span>
 
                 </td>
                 <td v-if="crud" align="right">
@@ -60,6 +51,10 @@
 </template>
 
 <script>
+import moment from 'moment';
+
+import dashGet from './../../../lib/dashGet';
+
 export default {
     name: 'c-datatable',
     components: {
@@ -102,6 +97,7 @@ export default {
         }
     },
     methods: {
+        dashGet,
         editItem(item) {
             this.$emit('edit', item);
         },
@@ -112,8 +108,13 @@ export default {
             return typeof(value) == 'number';
         },
         toLocalNumber(value) {
-            return value.toLocaleString('be-NL', { maximumSignificantDigits: 2 });
+            return value.toLocaleString('be-NL', { maximumSignificantDigits: 5 });
         },
+        formatDate(date) {
+            // return moment(date).format('LL');
+            return moment(date).calendar();
+            // return date;
+        }
     }
 }
 </script>

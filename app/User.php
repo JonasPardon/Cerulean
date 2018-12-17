@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use Notifiable;
     use HasMediaTrait;
@@ -24,16 +24,10 @@ class User extends Authenticatable
         'last_name',
         'nickname', 
         'email', 
-        'phone_number',
         'password',
+        'phone_number',
         'birthday',
-        'address_street',
-        'address_number',
-        'address_postal_code',
-        'address_city',
-        'country',
         'gender',
-
     ];
 
     /**

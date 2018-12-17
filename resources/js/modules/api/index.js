@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://app.cerulean.test/api'
+const baseUrl = 'http://api.cerulean.test'
 
 const methods = {
     async get(entity, identifier = null) {
@@ -16,17 +16,21 @@ const methods = {
         });
     },
     async post(entity, object) {
-        const postUrl = `${baseUrl}/${entity}/`;
+        const postUrl = `${baseUrl}/${entity}`;
 
         return new Promise(async (resolve, reject) => {
-            const response = await axios.post(
-                postUrl,
-                object
-            );
-            if(response.status === 201) {
-                return resolve(response.data.data);
-            } else {
-                return reject(response.statusText);
+            try {
+                const response = await axios.post(
+                    postUrl,
+                    object
+                );
+                if(response.status === 201) {
+                    return resolve(response.data.data);
+                } else {
+                    return reject(response.statusText);
+                }
+            } catch (error) {
+                return reject(error);
             }
         });
     },
