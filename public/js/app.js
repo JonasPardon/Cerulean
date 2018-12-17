@@ -94928,7 +94928,7 @@ var methods = {
                                                     return _context.abrupt('return', resolve(response.data.data));
 
                                                 case 7:
-                                                    return _context.abrupt('return', reject(response.data.statusText));
+                                                    return _context.abrupt('return', reject(response.statusText));
 
                                                 case 8:
                                                 case 'end':
@@ -94956,6 +94956,66 @@ var methods = {
         }
 
         return get;
+    }(),
+    post: function () {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(entity, object) {
+            var _this2 = this;
+
+            var postUrl;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            postUrl = baseUrl + '/' + entity + '/';
+                            return _context4.abrupt('return', new Promise(function () {
+                                var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(resolve, reject) {
+                                    var response;
+                                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                                        while (1) {
+                                            switch (_context3.prev = _context3.next) {
+                                                case 0:
+                                                    _context3.next = 2;
+                                                    return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(postUrl, object);
+
+                                                case 2:
+                                                    response = _context3.sent;
+
+                                                    if (!(response.status === 201)) {
+                                                        _context3.next = 7;
+                                                        break;
+                                                    }
+
+                                                    return _context3.abrupt('return', resolve(response.data.data));
+
+                                                case 7:
+                                                    return _context3.abrupt('return', reject(response.statusText));
+
+                                                case 8:
+                                                case 'end':
+                                                    return _context3.stop();
+                                            }
+                                        }
+                                    }, _callee3, _this2);
+                                }));
+
+                                return function (_x7, _x8) {
+                                    return _ref4.apply(this, arguments);
+                                };
+                            }()));
+
+                        case 2:
+                        case 'end':
+                            return _context4.stop();
+                    }
+                }
+            }, _callee4, this);
+        }));
+
+        function post(_x5, _x6) {
+            return _ref3.apply(this, arguments);
+        }
+
+        return post;
     }()
 };
 
