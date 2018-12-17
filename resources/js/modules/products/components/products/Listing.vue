@@ -1,9 +1,9 @@
 <template>
 
     <div>
-        <v-card>
+        <!-- <v-card>
             <v-card-title>
-                <span class="headline">{{ 'Products' | translate }}</span>
+                <span class="headline">Products</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     class="search-filter"
@@ -14,8 +14,9 @@
                     hide-details />
                 <v-btn
                     class="ml-3"
-                    color="info"
-                    flat>
+                    color="accent"
+                    flat
+                    @click='addItem'>
                     <v-icon>add</v-icon>
                     Add
                 </v-btn>
@@ -46,13 +47,21 @@
                         <v-icon small class='mr-2' @click="deleteItem(props.item)">
                             delete
                         </v-icon>
-                        <v-icon small class='mr-2'>
-                            visibility
-                        </v-icon>
                     </td>
                 </template>
             </v-data-table>
-        </v-card>
+        </v-card> -->
+
+        <master-datatable
+            title="Products"
+            :headers="headers"
+            :items="products"
+            crud
+            filterable
+            :loading="loading"
+            @add="addItem"
+            @edit="editItem"
+            @delete="deleteItem" />
 
         <product-edit 
             v-model='showEditDialog' 
@@ -60,19 +69,36 @@
             :product='editable'
             @close='closeEditDialog'
             @save='saveProduct' />
-    </div>
 
+        <confirm
+            v-model="showConfirmDialog"
+            :condition='showConfirmDialog'
+            title="Product delete"
+            @cancel='showConfirmDialog = false'
+            @confirm='confirmDeleteItem' >
+
+            <div class="body-1">Are you sure you want delete this product?</div>
+
+        </confirm>
+    </div>
 </template>
 
 <script>
     import axios from 'axios';
-    import Edit from './Edit';
     import moment from 'moment';
+
+    import API from './../../../api';
+    
+    import Edit from './Edit';
+    import Confirm from './../../../../components/generic/confirm/Confirm';
+    import MasterDatatable from './../../../../components/generic/datatable/Master';
 
     export default {
         name: 'home-component',
         components: {
             'product-edit': Edit,
+            'confirm': Confirm,
+            'master-datatable': MasterDatatable,
         },
         data() {
             return {
@@ -85,13 +111,15 @@
                     { text: 'Stock', value: 'stock' },
                     { text: 'Created', value: 'created_at' },
                     { text: 'Updated', value: 'updated_at' },
-                    { text: 'Actions', value: '', align: 'right'}
+                    // { text: '', value: '', align: 'right', sortable: false}
                 ],
                 products: [],
                 links: {},
                 loading: false,
                 editable: {},
+                deleteable: {},
                 showEditDialog: false,
+                showConfirmDialog: false,
                 filter: null,
             }
         },
@@ -104,55 +132,78 @@
         methods: {
             async fetchProducts(url = null) {
                 this.loading = true;
-                url = url ? url : '/api/products';
-                
-                this.callApi(url)
-                    .then(response => {
-                        this.products = response.data;
-                        this.links = response.links;
+
+                API.get('products')
+                    .then(res => {
+                        this.loading = false;
+                        this.products = res;
+                    })
+                    .catch(err => {
+                        alert(err);
                     });
-            },
-            async callApi(url) {
-                return new Promise(async (resolve, reject) => {
-
-                    const response = await axios.get(url);
-                    const data = response.data.data;
-                    const links = response.data.links;
-
-                    this.loading = false;
-                    return resolve({data, links});
-                });
             },
             editItem(product) {
                 this.editable = product;
                 this.showEditDialog = true;
+            },
+            deleteItem(product){
+                this.deleteable = product;
+                this.showConfirmDialog = true;
+            },
+            addItem() {
+                this.editable = {};
+                this.showEditDialog = true;
+            },
+            async confirmDeleteItem(){
+                this.showConfirmDialog = false;
+                this.loading = true;
+
+                API.delete('products', this.deleteable.id)
+                    .then(res => {
+                        this.loading = false;
+                        this.products = this.products.filter(product => {
+                            return product.id !== this.deleteable.id;
+                        });
+                        this.deleteable = {};
+                    })
+                    .catch(err => {
+                        alert(err);
+                        this.loading = false;
+                        this.deleteable = {};
+                    });
             },
             closeEditDialog(response) {
                 this.showEditDialog = false;
             },
             async saveProduct(product) {
                 this.showEditDialog = false;
-
                 this.loading = true;
 
-                const response = await axios.patch(
-                    `/api/products/${product.id}`,
-                    product
-                    ).then(response => {
-                        if(response.status === 200) {
+                if (!this.editable.id) {
+                    API.post('products', product)
+                        .then(res => {
                             this.loading = false;
-                        }else{
-                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`)
+                            this.products.push(res);
+                        })
+                        .catch(err => {
+                            alert(err);
                             this.loading = false;
-                        }
-                    })
-                    .catch(err => {
-                        alert(err);
-                    });
+                        });
+                } else {
+                    API.patch('products', product.id, product)
+                        .then(res => {
+                            this.loading = false;
+                        })
+                        .catch(err => {
+                            alert(err);
+                            this.loading = false;
+                        });
+                }
             },
             formatDate(date) {
                 // return moment(date).format('LL');
                 return moment(date).calendar();
+                // return date;
             }
         }
     }
