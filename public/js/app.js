@@ -94376,7 +94376,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
-var baseUrl = 'http://app.cerulean.test/api';
+var baseUrl = 'http://api.cerulean.test/';
 
 var methods = {
     get: function () {

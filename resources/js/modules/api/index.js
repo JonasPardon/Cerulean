@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://app.cerulean.test/api'
+const baseUrl = 'http://api.cerulean.test/'
 
 const methods = {
     async get(entity, identifier = null) {
