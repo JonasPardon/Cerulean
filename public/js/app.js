@@ -90689,6 +90689,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Edit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_generic_datatable_Master__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_generic_datatable_Master___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_generic_datatable_Master__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -90770,6 +90772,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -90783,11 +90794,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     name: 'home-component',
     components: {
         'product-edit': __WEBPACK_IMPORTED_MODULE_4__Edit___default.a,
-        'confirm': __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm___default.a
+        'confirm': __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm___default.a,
+        'master-datatable': __WEBPACK_IMPORTED_MODULE_6__components_generic_datatable_Master___default.a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at' }, { text: 'Updated', value: 'updated_at' }, { text: '', value: '', align: 'right', sortable: false }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Price', value: 'price_per_unit' }, { text: 'Unit', value: 'unit' }, { text: 'Weight', value: 'weight' }, { text: 'Stock', value: 'stock' }, { text: 'Created', value: 'created_at' }, { text: 'Updated', value: 'updated_at' }],
             products: [],
             links: {},
             loading: false,
@@ -92862,146 +92874,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-card-title",
-            [
-              _c("span", { staticClass: "headline" }, [_vm._v("Products")]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c("v-text-field", {
-                staticClass: "search-filter",
-                attrs: {
-                  "append-icon": "search",
-                  label: "Filter",
-                  "single-line": "",
-                  "hide-details": ""
-                },
-                model: {
-                  value: _vm.filter,
-                  callback: function($$v) {
-                    _vm.filter = $$v
-                  },
-                  expression: "filter"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  staticClass: "ml-3",
-                  attrs: { color: "accent", flat: "" },
-                  on: { click: _vm.addItem }
-                },
-                [
-                  _c("v-icon", [_vm._v("add")]),
-                  _vm._v("\n                    Add\n                ")
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-data-table", {
-            staticClass: "elevation-1",
-            attrs: {
-              headers: _vm.headers,
-              items: _vm.products,
-              loading: _vm.loading,
-              crud: true,
-              search: _vm.filter,
-              "rows-per-page-items": [
-                25,
-                50,
-                100,
-                { text: "All (might be slow)", value: -1 }
-              ]
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "items",
-                fn: function(props) {
-                  return [
-                    _c("td", [_vm._v(_vm._s(props.item.id) + ".")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.price_per_unit))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.unit))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        _vm._s(props.item.weight) +
-                          " " +
-                          _vm._s(props.item.weight_unit)
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.stock))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm.formatDate(props.item.created_at.date)))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm.formatDate(props.item.updated_at.date)))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { attrs: { align: "right" } },
-                      [
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-2",
-                            attrs: { small: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.editItem(props.item)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            edit\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-2",
-                            attrs: { small: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.deleteItem(props.item)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            delete\n                        "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
-        ],
-        1
-      ),
+      _c("master-datatable", {
+        attrs: {
+          title: "Products",
+          headers: _vm.headers,
+          items: _vm.products,
+          crud: "",
+          filterable: "",
+          loading: _vm.loading
+        },
+        on: { add: _vm.addItem, edit: _vm.editItem, delete: _vm.deleteItem }
+      }),
       _vm._v(" "),
       _c("product-edit", {
         attrs: { dialog: _vm.showEditDialog, product: _vm.editable },
@@ -93107,6 +92990,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Edit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -93162,6 +93047,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -93170,7 +93068,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'home-component',
     components: {
-        'category-edit': __WEBPACK_IMPORTED_MODULE_2__Edit___default.a
+        'category-edit': __WEBPACK_IMPORTED_MODULE_2__Edit___default.a,
+        'master-datatable': __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master___default.a
     },
     data: function data() {
         return {
@@ -93275,6 +93174,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return callApi;
         }(),
+        addCategory: function addCategory(category) {},
+        deleteCategory: function deleteCategory(category) {},
         editCategory: function editCategory(category) {
             this.editable = category;
             this.showEditDialog = true;
@@ -93813,119 +93714,21 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-card-title",
-            [
-              _c("span", { staticClass: "headline" }, [
-                _vm._v("Product categories")
-              ]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  "append-icon": "search",
-                  label: "Filter",
-                  "single-line": "",
-                  "hide-details": ""
-                },
-                model: {
-                  value: _vm.filter,
-                  callback: function($$v) {
-                    _vm.filter = $$v
-                  },
-                  expression: "filter"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-data-table", {
-            staticClass: "elevation-1",
-            attrs: {
-              headers: _vm.headers,
-              items: _vm.categories,
-              loading: _vm.loading,
-              crud: true,
-              search: _vm.filter,
-              "rows-per-page-items": [
-                25,
-                50,
-                100,
-                { text: "All (might be slow)", value: -1 }
-              ]
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "items",
-                fn: function(props) {
-                  return [
-                    _c("td", [_vm._v(_vm._s(props.item.id) + ".")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm.formatDate(props.item.created_at)))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm.formatDate(props.item.updated_at)))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { attrs: { align: "right" } },
-                      [
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-2",
-                            attrs: { small: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.editCategory(props.item)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            edit\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-icon",
-                          {
-                            staticClass: "mr-2",
-                            attrs: { small: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.deleteCategory(props.item)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            delete\n                        "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
-        ],
-        1
-      ),
+      _c("master-datatable", {
+        attrs: {
+          title: "Product categories",
+          headers: _vm.headers,
+          items: _vm.categories,
+          loading: _vm.loading,
+          crud: "",
+          filterable: ""
+        },
+        on: {
+          add: _vm.addCategory,
+          edit: _vm.editCategory,
+          delete: _vm.deleteCategory
+        }
+      }),
       _vm._v(" "),
       _c("category-edit", {
         attrs: { dialog: _vm.showEditDialog, category: _vm.editable },
@@ -95107,6 +94910,632 @@ var methods = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (methods);
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(242)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(244)
+/* template */
+var __vue_template__ = __webpack_require__(250)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-67ab8a90"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/generic/datatable/Master.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-67ab8a90", Component.options)
+  } else {
+    hotAPI.reload("data-v-67ab8a90", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(243);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("456c9e54", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67ab8a90\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Master.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67ab8a90\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Master.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 244 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Datatable__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Datatable__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'master-datatable',
+    components: {
+        'c-datatable': __WEBPACK_IMPORTED_MODULE_0__Datatable___default.a
+    },
+    props: {
+        title: {
+            required: true,
+            type: String
+        },
+        filterable: {
+            default: false,
+            type: Boolean
+        },
+        crud: {
+            default: false,
+            type: Boolean
+        },
+        headers: {
+            required: true,
+            type: Array
+        },
+        items: {
+            required: true,
+            type: Array
+        },
+        loading: {
+            default: true,
+            type: Boolean
+        }
+    },
+    data: function data() {
+        return {
+            filter: ''
+        };
+    },
+
+    methods: {
+        addItem: function addItem() {
+            this.$emit('add');
+        },
+        editItem: function editItem(item) {
+            this.$emit('edit', item);
+        },
+        deleteItem: function deleteItem(item) {
+            this.$emit('delete', item);
+        }
+    }
+});
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(246)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(248)
+/* template */
+var __vue_template__ = __webpack_require__(249)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-89ddaeb4"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/generic/datatable/Datatable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-89ddaeb4", Component.options)
+  } else {
+    hotAPI.reload("data-v-89ddaeb4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(247);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("f1e7b6d6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89ddaeb4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Datatable.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89ddaeb4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Datatable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 248 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'c-datatable',
+    components: {},
+    props: {
+        crud: {
+            type: Boolean,
+            default: false
+        },
+        headers: {
+            required: true,
+            type: Array
+        },
+        items: {
+            required: true,
+            type: Array
+        },
+        noResultText: {
+            type: String,
+            default: 'No data available'
+        },
+        loading: {
+            type: Boolean,
+            default: true
+        },
+        filter: {
+            type: String,
+            default: ''
+        }
+    },
+    data: function data() {
+        return {};
+    },
+    beforeMount: function beforeMount() {
+        if (this.crud) {
+            this.headers.push({ text: '', value: '' });
+        }
+    },
+
+    methods: {
+        editItem: function editItem(item) {
+            this.$emit('edit', item);
+        },
+        deleteItem: function deleteItem(item) {
+            this.$emit('delete', item);
+        },
+        isNumber: function isNumber(value) {
+            return typeof value == 'number';
+        },
+        toLocalNumber: function toLocalNumber(value) {
+            return value.toLocaleString('be-NL', { maximumSignificantDigits: 2 });
+        }
+    }
+});
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-data-table",
+    {
+      staticClass: "elevation-1",
+      attrs: {
+        headers: _vm.headers,
+        items: _vm.items,
+        loading: _vm.loading,
+        crud: true,
+        search: _vm.filter,
+        "rows-per-page-items": [
+          25,
+          50,
+          100,
+          { text: "All (might be slow)", value: -1 }
+        ]
+      },
+      scopedSlots: _vm._u([
+        {
+          key: "items",
+          fn: function(ref) {
+            var item = ref.item
+            return [
+              _c(
+                "tr",
+                [
+                  _vm._l(_vm.$props.headers, function(header) {
+                    return _c("td", { key: header.value }, [
+                      _vm._v(
+                        "\n                    \n                    " +
+                          _vm._s(
+                            _vm.isNumber(item[header.value])
+                              ? _vm.toLocalNumber(item[header.value])
+                              : item[header.value]
+                          ) +
+                          "\n\n                "
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _vm.crud
+                    ? _c(
+                        "td",
+                        { attrs: { align: "right" } },
+                        [
+                          _vm._t("actions"),
+                          _vm._v(" "),
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "mr-2",
+                              attrs: { small: "", title: "edit" },
+                              on: {
+                                click: function($event) {
+                                  _vm.editItem(item)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        edit\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "mr-2",
+                              attrs: { small: "", title: "delete" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteItem(item)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        delete\n                    "
+                              )
+                            ]
+                          )
+                        ],
+                        2
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+            ]
+          }
+        }
+      ])
+    },
+    [
+      _c(
+        "template",
+        { slot: "no-data" },
+        [
+          _vm._t("no-data", [
+            !_vm.loading
+              ? _c(
+                  "v-alert",
+                  { attrs: { value: true, color: "error", icon: "warning" } },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.noResultText) +
+                        "\n                "
+                    )
+                  ]
+                )
+              : _vm._e()
+          ])
+        ],
+        2
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-89ddaeb4", module.exports)
+  }
+}
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    [
+      _c(
+        "v-card-title",
+        [
+          _c("span", { staticClass: "headline" }, [
+            _vm._v("\n                " + _vm._s(_vm.title) + "\n            ")
+          ]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _vm.filterable
+            ? _c("v-text-field", {
+                staticClass: "search-filter",
+                attrs: {
+                  "append-icon": "search",
+                  label: "Filter",
+                  "single-line": "",
+                  "hide-details": ""
+                },
+                model: {
+                  value: _vm.filter,
+                  callback: function($$v) {
+                    _vm.filter = $$v
+                  },
+                  expression: "filter"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.crud
+            ? _c(
+                "v-btn",
+                {
+                  staticClass: "ml-3",
+                  attrs: { color: "accent", flat: "" },
+                  on: { click: _vm.addItem }
+                },
+                [
+                  _c("v-icon", [_vm._v("add")]),
+                  _vm._v("\n                Add\n            ")
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("c-datatable", {
+        attrs: {
+          crud: _vm.crud,
+          filterable: _vm.filterable,
+          headers: _vm.headers,
+          items: _vm.items,
+          loading: _vm.loading,
+          filter: _vm.filter
+        },
+        on: { edit: _vm.editItem, delete: _vm.deleteItem }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-67ab8a90", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

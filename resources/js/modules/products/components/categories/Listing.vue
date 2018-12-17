@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-card>
+        <!-- <v-card>
             <v-card-title>
                 <span class="headline">Product categories</span>
                 <v-spacer></v-spacer>
@@ -37,7 +37,18 @@
                     </td>
                 </template>
             </v-data-table>
-        </v-card>
+        </v-card> -->
+
+        <master-datatable 
+            title="Product categories"
+            :headers="headers"
+            :items="categories"
+            :loading="loading"
+            @add="addCategory"
+            @edit="editCategory"
+            @delete="deleteCategory"
+            crud
+            filterable />
 
         <category-edit 
             v-model='showEditDialog' 
@@ -54,10 +65,13 @@
     import Edit from './Edit';
     import moment from 'moment';
 
+    import MasterDatatable from './../../../../components/generic/datatable/Master';
+
     export default {
         name: 'home-component',
         components: {
             'category-edit': Edit,
+            'master-datatable': MasterDatatable,
         },
         data() {
             return {
@@ -103,6 +117,12 @@
                     this.loading = false;
                     return resolve({data, links});
                 });
+            },
+            addCategory(category) {
+
+            },
+            deleteCategory(category) {
+
             },
             editCategory(category) {
                 this.editable = category;

@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-card>
+        <!-- <v-card>
             <v-card-title>
                 <span class="headline">Products</span>
                 <v-spacer></v-spacer>
@@ -47,13 +47,21 @@
                         <v-icon small class='mr-2' @click="deleteItem(props.item)">
                             delete
                         </v-icon>
-                        <!-- <v-icon small class='mr-2'>
-                            visibility
-                        </v-icon> -->
                     </td>
                 </template>
             </v-data-table>
-        </v-card>
+        </v-card> -->
+
+        <master-datatable
+            title="Products"
+            :headers="headers"
+            :items="products"
+            crud
+            filterable
+            :loading="loading"
+            @add="addItem"
+            @edit="editItem"
+            @delete="deleteItem" />
 
         <product-edit 
             v-model='showEditDialog' 
@@ -83,12 +91,14 @@
     
     import Edit from './Edit';
     import Confirm from './../../../../components/generic/confirm/Confirm';
+    import MasterDatatable from './../../../../components/generic/datatable/Master';
 
     export default {
         name: 'home-component',
         components: {
             'product-edit': Edit,
             'confirm': Confirm,
+            'master-datatable': MasterDatatable,
         },
         data() {
             return {
@@ -101,7 +111,7 @@
                     { text: 'Stock', value: 'stock' },
                     { text: 'Created', value: 'created_at' },
                     { text: 'Updated', value: 'updated_at' },
-                    { text: '', value: '', align: 'right', sortable: false}
+                    // { text: '', value: '', align: 'right', sortable: false}
                 ],
                 products: [],
                 links: {},
