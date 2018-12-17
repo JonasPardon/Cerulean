@@ -28,7 +28,7 @@ export default {
         tooltip: {
             fixed: {
                 enabled: false,
-                position: 'topRight'
+                position: 'topRight',
             }
         }
       }
