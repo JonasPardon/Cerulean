@@ -94260,7 +94260,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.chart-small[data-v-f2af2848] {\n  max-width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -94275,6 +94275,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_apexcharts__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_apexcharts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_apexcharts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Charts_Bar__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Charts_Bar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Charts_Bar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Charts_Area__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Charts_Area___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Charts_Area__);
 //
 //
 //
@@ -94304,6 +94308,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -94314,29 +94329,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'dashboard',
     components: {
-        'apex-chart': __WEBPACK_IMPORTED_MODULE_1_vue_apexcharts___default.a
+        'apex-chart': __WEBPACK_IMPORTED_MODULE_1_vue_apexcharts___default.a,
+        'bar-chart': __WEBPACK_IMPORTED_MODULE_2__Charts_Bar___default.a,
+        'area-chart': __WEBPACK_IMPORTED_MODULE_3__Charts_Area___default.a
     },
     data: function data() {
-        return {
-            charts: [{
-                options: {
-                    chart: {
-                        type: 'line'
-                    },
-                    series: [{
-                        name: 'sales',
-                        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-                    }],
-                    xaxis: {
-                        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-                    }
-                }
-            }, {
-                options: {
-                    series: [44, 55, 41, 17, 15]
-                }
-            }]
-        };
+        return {};
+    },
+    mounted: function mounted() {
+        this.$nextTick(function () {
+            window.dispatchEvent(new Event('resize'));
+        });
     }
 });
 
@@ -94357,7 +94360,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._v("\n        DASHBOARD\n        "),
       _c(
         "v-layout",
         { attrs: { fluid: "" } },
@@ -94375,19 +94377,28 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c("apex-chart", {
-                        attrs: {
-                          type: "bar",
-                          options: _vm.charts[0].options,
-                          series: _vm.charts[0].options.series
-                        }
-                      })
-                    ],
-                    1
-                  )
+                  _c("v-card-text", [_c("bar-chart")], 1)
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { staticClass: "ma-2", attrs: { xs12: "", sm6: "", md6: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _vm._v(
+                      "\n                        Area chart\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [_c("area-chart")], 1)
                 ],
                 1
               )
@@ -94404,23 +94415,11 @@ var render = function() {
                 [
                   _c("v-card-title", [
                     _vm._v(
-                      "\n                        Donut chart\n                    "
+                      "\n                        Bar chart\n                    "
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c("apex-chart", {
-                        attrs: {
-                          type: "donut",
-                          options: _vm.charts[1].options,
-                          series: _vm.charts[1].options.series
-                        }
-                      })
-                    ],
-                    1
-                  )
+                  _c("v-card-text", [_c("bar-chart")], 1)
                 ],
                 1
               )
@@ -94600,6 +94599,283 @@ if (false) {
 
 })));
 
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(231)
+/* template */
+var __vue_template__ = __webpack_require__(232)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/modules/dashboard/components/Charts/Bar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ffbac2be", Component.options)
+  } else {
+    hotAPI.reload("data-v-ffbac2be", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_apexcharts__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'BarChart',
+  components: {
+    'apexchart': __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts___default.a
+  },
+  data: function data() {
+    return {
+      chartOptions: {
+        plotOptions: {
+          bar: {
+            horizontal: true
+          }
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        }
+      },
+      series: [{
+        name: 'Sales',
+        data: [30, 40, 45, 50, 49, 60, 70, 91]
+      }]
+    };
+  },
+  mounted: function mounted() {
+    //   window.dispatchEvent(new Event('resize'));
+  },
+
+  methods: {
+    updateChart: function updateChart() {
+      var max = 90;
+      var min = 20;
+      var newData = this.series[0].data.map(function () {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      });
+      var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
+      // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
+      this.chartOptions = {
+        colors: [colors[Math.floor(Math.random() * colors.length)]]
+      };
+      // In the same way, update the series option
+      this.series = [{
+        data: newData
+      }];
+    }
+  }
+});
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "example" },
+    [
+      _c("apexchart", {
+        attrs: { type: "bar", options: _vm.chartOptions, series: _vm.series }
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", { on: { click: _vm.updateChart } }, [_vm._v("Update!")])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ffbac2be", module.exports)
+  }
+}
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(234)
+/* template */
+var __vue_template__ = __webpack_require__(235)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/modules/dashboard/components/Charts/Area.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e7ce1c22", Component.options)
+  } else {
+    hotAPI.reload("data-v-e7ce1c22", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 234 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_apexcharts__);
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'AreaChart',
+    components: {
+        'apexchart': __WEBPACK_IMPORTED_MODULE_0_vue_apexcharts___default.a
+    },
+    data: function data() {
+        return {
+            chartOptions: {
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                xaxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb"]
+                },
+                tooltip: {
+                    fixed: {
+                        enabled: false,
+                        position: 'topRight'
+                    }
+                }
+            },
+
+            series: [{
+                name: 'series1',
+                data: [31, 40, 28, 51, 42, 109, 100, 11, 32, 45, 32, 34, 52, 41]
+            }, {
+                name: 'series2',
+                data: [11, 32, 45, 32, 34, 52, 41, 31, 40, 28, 51, 42, 109, 100]
+            }]
+        };
+    }
+});
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "example" },
+    [
+      _c("apexchart", {
+        attrs: { type: "area", options: _vm.chartOptions, series: _vm.series }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e7ce1c22", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

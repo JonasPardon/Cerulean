@@ -1,6 +1,5 @@
 <template>
     <div>
-        DASHBOARD
         <v-layout fluid>
             <v-flex xs12 sm6 md3 class="ma-2">
                 <v-card>
@@ -8,17 +7,27 @@
                         Bar chart
                     </v-card-title>
                     <v-card-text>
-                        <apex-chart type="bar" :options="charts[0].options" :series="charts[0].options.series"></apex-chart>
+                        <bar-chart></bar-chart>
                     </v-card-text>
                 </v-card>
             </v-flex>
-            <v-flex xs12 sm6 md3 class="ma-2">
+            <v-flex xs12 sm6 md6 class="ma-2">
                 <v-card>
                     <v-card-title>
-                        Donut chart
+                        Area chart
                     </v-card-title>
                     <v-card-text>
-                        <apex-chart type="donut" :options="charts[1].options" :series="charts[1].options.series"></apex-chart>
+                        <area-chart></area-chart>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+             <v-flex xs12 sm6 md3 class="ma-2">
+                <v-card>
+                    <v-card-title>
+                        Bar chart
+                    </v-card-title>
+                    <v-card-text>
+                        <bar-chart></bar-chart>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -31,6 +40,8 @@
 import Vue from 'vue';
 
 import VueApexCharts from 'vue-apexcharts';
+import BarChart from './Charts/Bar';
+import AreaChart from './Charts/Area';
 
 // Vue.use(ApexCharts);
 
@@ -38,37 +49,22 @@ export default {
     name: 'dashboard',
     components: {
         'apex-chart': VueApexCharts,
+        'bar-chart': BarChart,
+        'area-chart': AreaChart,
     },
     data() {
-        return {
-            charts: [
-                {
-                    options: {
-                        chart: {
-                            type: 'line'
-                        },
-                        series: [{
-                            name: 'sales',
-                            data: [30,40,35,50,49,60,70,91,125]
-                        }],
-                        xaxis: {
-                            categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
-                        }
-                    }
-                },
-                {
-                    options: {
-                        series: [
-                            44, 55, 41, 17, 15
-                        ]
-                    }
-                }
-            ]
-        }
+        return {}
     },
+    mounted() {
+        this.$nextTick(() => {
+            window.dispatchEvent(new Event('resize'));
+        });
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.chart-small {
+    max-width: 100%;
+}
 </style>
