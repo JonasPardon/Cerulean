@@ -92940,8 +92940,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Edit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master__ = __webpack_require__(241);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__api__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_datatable_Master__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_datatable_Master___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_generic_datatable_Master__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -92978,15 +92979,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'home-component',
     components: {
         'category-edit': __WEBPACK_IMPORTED_MODULE_2__Edit___default.a,
-        'master-datatable': __WEBPACK_IMPORTED_MODULE_4__components_generic_datatable_Master___default.a
+        'master-datatable': __WEBPACK_IMPORTED_MODULE_5__components_generic_datatable_Master___default.a
     },
     data: function data() {
         return {
-            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Created', value: 'created_at' }, { text: 'Updated', value: 'updated_at' }, { text: 'Actions', value: '', align: 'right' }],
+            headers: [{ text: 'ID', value: 'id' }, { text: 'Name', value: 'name' }, { text: 'Created', value: 'created_at.date' }, { text: 'Updated', value: 'updated_at.date' }],
             categories: [],
             links: {},
             loading: false,
@@ -93006,20 +93009,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 var _this = this;
 
-                var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 this.loading = true;
-                                url = url ? url : '/api/product_categories';
 
-                                this.callApi(url).then(function (response) {
-                                    _this.categories = response.data;
-                                    _this.links = response.links;
+                                __WEBPACK_IMPORTED_MODULE_4__api__["a" /* default */].get('product_categories').then(function (res) {
+                                    _this.categories = res;
+                                    _this.loading = false;
+                                }).catch(function (err) {
+                                    alert(err);
+                                    _this.loading = false;
                                 });
 
-                            case 3:
+                            case 2:
                             case 'end':
                                 return _context.stop();
                         }
@@ -93033,83 +93037,57 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return fetchCategories;
         }(),
-        callApi: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(url) {
-                var _this2 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                return _context3.abrupt('return', new Promise(function () {
-                                    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(resolve, reject) {
-                                        var response, data, links;
-                                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                                            while (1) {
-                                                switch (_context2.prev = _context2.next) {
-                                                    case 0:
-                                                        _context2.next = 2;
-                                                        return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(url);
-
-                                                    case 2:
-                                                        response = _context2.sent;
-                                                        data = response.data.data;
-                                                        links = response.data.links;
-
-
-                                                        _this2.loading = false;
-                                                        return _context2.abrupt('return', resolve({ data: data, links: links }));
-
-                                                    case 7:
-                                                    case 'end':
-                                                        return _context2.stop();
-                                                }
-                                            }
-                                        }, _callee2, _this2);
-                                    }));
-
-                                    return function (_x3, _x4) {
-                                        return _ref3.apply(this, arguments);
-                                    };
-                                }()));
-
-                            case 1:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function callApi(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return callApi;
-        }(),
-        addCategory: function addCategory(category) {},
+        addCategory: function addCategory(category) {
+            this.editable = {};
+            this.showEditDialog = true;
+        },
         deleteCategory: function deleteCategory(category) {},
         editCategory: function editCategory(category) {
             this.editable = category;
             this.showEditDialog = true;
         },
+        saveCategory: function saveCategory(category) {
+            var _this2 = this;
+
+            this.loading = true;
+            this.showEditDialog = false;
+
+            if (!this.editable.id) {
+                __WEBPACK_IMPORTED_MODULE_4__api__["a" /* default */].post('product_categories', this.editable).then(function (res) {
+                    _this2.categories.push(res);
+                    _this2.loading = false;
+                }).catch(function (err) {
+                    alert(err);
+                    _this2.loading = false;
+                });
+            } else {
+                __WEBPACK_IMPORTED_MODULE_4__api__["a" /* default */].patch('product_categories', this.editable.id, this.editable).then(function (res) {
+                    _this2.editable = {};
+                    _this2.loading = false;
+                }).catch(function (err) {
+                    alert(err);
+                    _this2.editable = {};
+                    _this2.loading = false;
+                });
+            }
+        },
         closeEditDialog: function closeEditDialog(response) {
             this.showEditDialog = false;
         },
         savecategory: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(category) {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(category) {
                 var _this3 = this;
 
                 var response;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context2.prev = _context2.next) {
                             case 0:
                                 this.showEditDialog = false;
 
                                 this.loading = true;
 
-                                _context4.next = 4;
+                                _context2.next = 4;
                                 return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/product_categories/' + category.id, category).then(function (response) {
                                     if (response.status === 200) {
                                         _this3.loading = false;
@@ -93122,18 +93100,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 });
 
                             case 4:
-                                response = _context4.sent;
+                                response = _context2.sent;
 
                             case 5:
                             case 'end':
-                                return _context4.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee4, this);
+                }, _callee2, this);
             }));
 
-            function savecategory(_x5) {
-                return _ref4.apply(this, arguments);
+            function savecategory(_x) {
+                return _ref2.apply(this, arguments);
             }
 
             return savecategory;
@@ -93276,44 +93254,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'category-edit',
@@ -93331,7 +93271,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         closeDialog: function closeDialog() {
             this.$emit('close', this.category);
         },
-        savecategory: function savecategory() {
+        saveCategory: function saveCategory() {
             this.$emit('save', this.category);
         }
     }
@@ -93367,7 +93307,9 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Edit category")
+                  _vm._v(
+                    _vm._s(this.category.id ? "Edit" : "New") + " category"
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -93394,148 +93336,6 @@ var render = function() {
                                     _vm.$set(_vm.category, "name", $$v)
                                   },
                                   expression: "category.name"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md4: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Price*", required: "" },
-                                model: {
-                                  value: _vm.category.price_per_unit,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.category,
-                                      "price_per_unit",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "category.price_per_unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Unit*", required: "" },
-                                model: {
-                                  value: _vm.category.unit,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "unit", $$v)
-                                  },
-                                  expression: "category.unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Currency*", required: "" },
-                                model: {
-                                  value: _vm.category.currency,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "currency", $$v)
-                                  },
-                                  expression: "category.currency"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Weight*", required: "" },
-                                model: {
-                                  value: _vm.category.weight,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "weight", $$v)
-                                  },
-                                  expression: "category.weight"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Weight unit*", required: "" },
-                                model: {
-                                  value: _vm.category.weight_unit,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "weight_unit", $$v)
-                                  },
-                                  expression: "category.weight_unit"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "", md2: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Stock*", required: "" },
-                                model: {
-                                  value: _vm.category.stock,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "stock", $$v)
-                                  },
-                                  expression: "category.stock"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-combobox", {
-                                attrs: {
-                                  items: [
-                                    "Category one",
-                                    "Category two",
-                                    "Category three"
-                                  ],
-                                  "item-text": "name",
-                                  "item-value": "id",
-                                  label: "category categories",
-                                  chips: "",
-                                  clearable: "",
-                                  multiple: ""
-                                },
-                                model: {
-                                  value: _vm.category.categories,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.category, "categories", $$v)
-                                  },
-                                  expression: "category.categories"
                                 }
                               })
                             ],
@@ -93589,7 +93389,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue darken-1", flat: "" },
-                      on: { click: _vm.savecategory }
+                      on: { click: _vm.saveCategory }
                     },
                     [_vm._v("Save")]
                   )
@@ -93645,7 +93445,7 @@ var render = function() {
       _vm._v(" "),
       _c("category-edit", {
         attrs: { dialog: _vm.showEditDialog, category: _vm.editable },
-        on: { close: _vm.closeEditDialog, save: _vm.savecategory },
+        on: { close: _vm.closeEditDialog, save: _vm.saveCategory },
         model: {
           value: _vm.showEditDialog,
           callback: function($$v) {
@@ -94649,7 +94449,7 @@ var methods = {
                 while (1) {
                     switch (_context4.prev = _context4.next) {
                         case 0:
-                            postUrl = baseUrl + '/' + entity + '/';
+                            postUrl = baseUrl + '/' + entity;
                             return _context4.abrupt('return', new Promise(function () {
                                 var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(resolve, reject) {
                                     var response;
@@ -94657,28 +94457,38 @@ var methods = {
                                         while (1) {
                                             switch (_context3.prev = _context3.next) {
                                                 case 0:
-                                                    _context3.next = 2;
+                                                    _context3.prev = 0;
+                                                    _context3.next = 3;
                                                     return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(postUrl, object);
 
-                                                case 2:
+                                                case 3:
                                                     response = _context3.sent;
 
                                                     if (!(response.status === 201)) {
-                                                        _context3.next = 7;
+                                                        _context3.next = 8;
                                                         break;
                                                     }
 
                                                     return _context3.abrupt('return', resolve(response.data.data));
 
-                                                case 7:
+                                                case 8:
                                                     return _context3.abrupt('return', reject(response.statusText));
 
-                                                case 8:
+                                                case 9:
+                                                    _context3.next = 14;
+                                                    break;
+
+                                                case 11:
+                                                    _context3.prev = 11;
+                                                    _context3.t0 = _context3['catch'](0);
+                                                    return _context3.abrupt('return', reject(_context3.t0));
+
+                                                case 14:
                                                 case 'end':
                                                     return _context3.stop();
                                             }
                                         }
-                                    }, _callee3, _this2);
+                                    }, _callee3, _this2, [[0, 11]]);
                                 }));
 
                                 return function (_x7, _x8) {
@@ -95212,7 +95022,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return typeof value == 'number';
         },
         toLocalNumber: function toLocalNumber(value) {
-            return value.toLocaleString('be-NL', { maximumSignificantDigits: 2 });
+            return value.toLocaleString('be-NL', { maximumSignificantDigits: 5 });
         }
     }
 });

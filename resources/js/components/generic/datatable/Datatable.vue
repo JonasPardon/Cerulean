@@ -100,7 +100,7 @@ export default {
             return typeof(value) == 'number';
         },
         toLocalNumber(value) {
-            return value.toLocaleString('be-NL', { maximumSignificantDigits: 2 });
+            return value.toLocaleString('be-NL', { maximumSignificantDigits: 5 });
         },
     }
 }

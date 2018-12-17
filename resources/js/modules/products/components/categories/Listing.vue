@@ -18,7 +18,7 @@
             :dialog='showEditDialog' 
             :category='editable'
             @close='closeEditDialog'
-            @save='savecategory' />
+            @save='saveCategory' />
     </div>
 
 </template>
@@ -27,6 +27,8 @@
     import axios from 'axios';
     import Edit from './Edit';
     import moment from 'moment';
+
+    import API from './../../../api';
 
     import MasterDatatable from './../../../../components/generic/datatable/Master';
 
@@ -41,9 +43,8 @@
                 headers: [
                     { text: 'ID', value: 'id' },
                     { text: 'Name', value: 'name' },
-                    { text: 'Created', value: 'created_at' },
-                    { text: 'Updated', value: 'updated_at' },
-                    { text: 'Actions', value: '', align: 'right'}
+                    { text: 'Created', value: 'created_at.date' },
+                    { text: 'Updated', value: 'updated_at.date' },
                 ],
                 categories: [],
                 links: {},
@@ -60,29 +61,22 @@
             this.fetchCategories();
         },
         methods: {
-            async fetchCategories(url = null) {
+            async fetchCategories() {
                 this.loading = true;
-                url = url ? url : '/api/product_categories';
                 
-                this.callApi(url)
-                    .then(response => {
-                        this.categories = response.data;
-                        this.links = response.links;
+                API.get('product_categories')
+                    .then(res => {
+                        this.categories = res;
+                        this.loading = false;
+                    })
+                    .catch(err => {
+                        alert(err);
+                        this.loading = false;
                     });
             },
-            async callApi(url) {
-                return new Promise(async (resolve, reject) => {
-
-                    const response = await axios.get(url);
-                    const data = response.data.data;
-                    const links = response.data.links;
-
-                    this.loading = false;
-                    return resolve({data, links});
-                });
-            },
             addCategory(category) {
-
+                this.editable = {};
+                this.showEditDialog = true;
             },
             deleteCategory(category) {
 
@@ -90,6 +84,33 @@
             editCategory(category) {
                 this.editable = category;
                 this.showEditDialog = true;
+            },
+            saveCategory(category) {
+                this.loading = true;
+                this.showEditDialog = false;
+
+                if (!this.editable.id) {
+                    API.post('product_categories', this.editable)
+                        .then(res => {
+                            this.categories.push(res);
+                            this.loading = false;
+                        })
+                        .catch(err => {
+                            alert(err);
+                            this.loading = false;
+                        });
+                } else {
+                    API.patch('product_categories', this.editable.id, this.editable)
+                        .then(res => {
+                            this.editable = {};
+                            this.loading = false;
+                        })
+                        .catch(err => {
+                            alert(err);
+                            this.editable = {};
+                            this.loading = false;
+                        });
+                }
             },
             closeEditDialog(response) {
                 this.showEditDialog = false;
