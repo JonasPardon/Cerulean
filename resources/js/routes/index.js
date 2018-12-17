@@ -1,23 +1,9 @@
-import ProductList from './../modules/products/components/products/Listing';
-import ProductCategoryList from './../modules/products/components/categories/Listing';
-import Dashboard from './../modules/dashboard/components/Dashboard';
+import DashboardRoutes from './../modules/dashboard/routes';
+import ProductRoutes from './../modules/products/routes';
 
 const routes = [
-    {
-        name: 'products',
-        path: '/products',
-        component: ProductList,
-    },
-    {
-        name: 'product_categories',
-        path: '/product_categories',
-        component: ProductCategoryList,
-    },
-    {
-        name: 'dashboard',
-        path: '/',
-        component: Dashboard,
-    }
+    ...ProductRoutes,
+    ...DashboardRoutes,
 ];
 
 export default routes;

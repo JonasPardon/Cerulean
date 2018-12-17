@@ -11,14 +11,14 @@ const nav = [
         icon: 'assignment',
         children: [
             {
-                name: 'products',
+                name: 'products.all',
                 label: 'Products',
-                route: 'products'
+                route: 'products.all'
             },
             {
                 name: 'products.categories',
                 label: 'Product categories',
-                route: 'product_categories',
+                route: 'products.categories',
             }
         ]
     },

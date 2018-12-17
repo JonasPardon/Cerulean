@@ -90548,13 +90548,13 @@ var nav = [{
     label: 'Inventory',
     icon: 'assignment',
     children: [{
-        name: 'products',
+        name: 'products.all',
         label: 'Products',
-        route: 'products'
+        route: 'products.all'
     }, {
         name: 'products.categories',
         label: 'Product categories',
-        route: 'product_categories'
+        route: 'products.categories'
     }]
 }, {
     name: 'crm',
@@ -94148,29 +94148,14 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_products_components_products_Listing__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_products_components_products_Listing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__modules_products_components_products_Listing__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_products_components_categories_Listing__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_products_components_categories_Listing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__modules_products_components_categories_Listing__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_dashboard_components_Dashboard__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_dashboard_components_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modules_dashboard_components_Dashboard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_dashboard_routes__ = __webpack_require__(237);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_products_routes__ = __webpack_require__(236);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 
 
 
-var routes = [{
-    name: 'products',
-    path: '/products',
-    component: __WEBPACK_IMPORTED_MODULE_0__modules_products_components_products_Listing___default.a
-}, {
-    name: 'product_categories',
-    path: '/product_categories',
-    component: __WEBPACK_IMPORTED_MODULE_1__modules_products_components_categories_Listing___default.a
-}, {
-    name: 'dashboard',
-    path: '/',
-    component: __WEBPACK_IMPORTED_MODULE_2__modules_dashboard_components_Dashboard___default.a
-}];
+var routes = [].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_1__modules_products_routes__["a" /* default */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_0__modules_dashboard_routes__["a" /* default */]));
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
 
@@ -94876,6 +94861,47 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-e7ce1c22", module.exports)
   }
 }
+
+/***/ }),
+/* 236 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_products_Listing__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_products_Listing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_products_Listing__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_categories_Listing__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_categories_Listing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_categories_Listing__);
+
+
+
+var routes = [{
+    name: 'products.all',
+    path: '/products/all',
+    component: __WEBPACK_IMPORTED_MODULE_0__components_products_Listing___default.a
+}, {
+    name: 'products.categories',
+    path: '/products/categories',
+    component: __WEBPACK_IMPORTED_MODULE_1__components_categories_Listing___default.a
+}];
+
+/* harmony default export */ __webpack_exports__["a"] = (routes);
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Dashboard__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Dashboard__);
+
+
+var routes = [{
+    name: 'dashboard',
+    path: '/',
+    component: __WEBPACK_IMPORTED_MODULE_0__components_Dashboard___default.a
+}];
+
+/* harmony default export */ __webpack_exports__["a"] = (routes);
 
 /***/ })
 /******/ ]);
