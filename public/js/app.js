@@ -90853,7 +90853,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
                 var _this2 = this;
 
-                var response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
@@ -90861,27 +90860,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 this.showConfirmDialog = false;
                                 this.loading = true;
 
-                                _context2.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete('api/products/' + this.deleteable.id).then(function (response) {
-                                    if (response.status === 200) {
-                                        _this2.loading = false;
-                                        _this2.products = _this2.products.filter(function (product) {
-                                            return product.id !== _this2.deleteable.id;
-                                        });
-                                        _this2.deleteable = {};
-                                    } else {
-                                        alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this2.loading = false;
-                                        _this2.deleteable = {};
-                                    }
+                                __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */].delete('products', this.deleteable.id).then(function (res) {
+                                    _this2.loading = false;
+                                    _this2.products = _this2.products.filter(function (product) {
+                                        return product.id !== _this2.deleteable.id;
+                                    });
+                                    _this2.deleteable = {};
                                 }).catch(function (err) {
                                     alert(err);
+                                    _this2.loading = false;
+                                    _this2.deleteable = {};
                                 });
 
-                            case 4:
-                                response = _context2.sent;
-
-                            case 5:
+                            case 3:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -90902,8 +90893,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(product) {
                 var _this3 = this;
 
-                var response, _response;
-
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
@@ -90911,46 +90900,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 this.showEditDialog = false;
                                 this.loading = true;
 
-                                if (this.editable.id) {
-                                    _context3.next = 8;
-                                    break;
+                                if (!this.editable.id) {
+                                    __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */].post('products', product).then(function (res) {
+                                        _this3.loading = false;
+                                        _this3.products.push(res);
+                                    }).catch(function (err) {
+                                        alert(err);
+                                        _this3.loading = false;
+                                    });
+                                } else {
+                                    __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */].patch('products', product.id, product).then(function (res) {
+                                        _this3.loading = false;
+                                    }).catch(function (err) {
+                                        alert(err);
+                                        _this3.loading = false;
+                                    });
                                 }
 
-                                _context3.next = 5;
-                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/products', product).then(function (response) {
-                                    if (response.status === 201) {
-                                        _this3.loading = false;
-                                        _this3.products.push(response.data.data);
-                                    } else {
-                                        alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this3.loading = false;
-                                    }
-                                }).catch(function (err) {
-                                    alert(err);
-                                });
-
-                            case 5:
-                                response = _context3.sent;
-                                _context3.next = 11;
-                                break;
-
-                            case 8:
-                                _context3.next = 10;
-                                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/products/' + product.id, product).then(function (response) {
-                                    if (response.status === 200) {
-                                        _this3.loading = false;
-                                    } else {
-                                        alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this3.loading = false;
-                                    }
-                                }).catch(function (err) {
-                                    alert(err);
-                                });
-
-                            case 10:
-                                _response = _context3.sent;
-
-                            case 11:
+                            case 3:
                             case 'end':
                                 return _context3.stop();
                         }

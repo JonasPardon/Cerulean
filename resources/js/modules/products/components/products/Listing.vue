@@ -148,22 +148,18 @@
                 this.showConfirmDialog = false;
                 this.loading = true;
 
-                const response = await axios.delete(`api/products/${this.deleteable.id}`)
-                    .then(response => {
-                        if(response.status === 200) {
-                            this.loading = false;
-                            this.products = this.products.filter(product => {
-                                return product.id !== this.deleteable.id;
-                            });
-                            this.deleteable = {};
-                        } else {
-                            alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
-                            this.loading = false;
-                            this.deleteable = {};
-                        }
+                API.delete('products', this.deleteable.id)
+                    .then(res => {
+                        this.loading = false;
+                        this.products = this.products.filter(product => {
+                            return product.id !== this.deleteable.id;
+                        });
+                        this.deleteable = {};
                     })
                     .catch(err => {
                         alert(err);
+                        this.loading = false;
+                        this.deleteable = {};
                     });
             },
             closeEditDialog(response) {
@@ -174,35 +170,23 @@
                 this.loading = true;
 
                 if (!this.editable.id) {
-                     const response = await axios.post(
-                        `/api/products`,
-                        product
-                        ).then(response => {
-                            if(response.status === 201) {
-                                this.loading = false;
-                                this.products.push(response.data.data);
-                            }else{
-                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
-                                this.loading = false;
-                            }
+                    API.post('products', product)
+                        .then(res => {
+                            this.loading = false;
+                            this.products.push(res);
                         })
                         .catch(err => {
                             alert(err);
+                            this.loading = false;
                         });
                 } else {
-                    const response = await axios.patch(
-                        `/api/products/${product.id}`,
-                        product
-                        ).then(response => {
-                            if(response.status === 200) {
-                                this.loading = false;
-                            }else{
-                                alert(`Something went wrong.\nStatus code: ${response.status}\nStatus message: ${response.statusText}`);
-                                this.loading = false;
-                            }
+                    API.patch('products', product.id, product)
+                        .then(res => {
+                            this.loading = false;
                         })
                         .catch(err => {
                             alert(err);
+                            this.loading = false;
                         });
                 }
             },
