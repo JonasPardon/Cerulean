@@ -95076,6 +95076,66 @@ var methods = {
         }
 
         return patch;
+    }(),
+    delete: function () {
+        var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee8(entity, identifier) {
+            var _this4 = this;
+
+            var deleteUrl;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee8$(_context8) {
+                while (1) {
+                    switch (_context8.prev = _context8.next) {
+                        case 0:
+                            deleteUrl = baseUrl + '/' + entity + '/' + identifier;
+                            return _context8.abrupt('return', new Promise(function () {
+                                var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(resolve, reject) {
+                                    var response;
+                                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+                                        while (1) {
+                                            switch (_context7.prev = _context7.next) {
+                                                case 0:
+                                                    _context7.next = 2;
+                                                    return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete(deleteUrl);
+
+                                                case 2:
+                                                    response = _context7.sent;
+
+                                                    if (!(response.status === 200)) {
+                                                        _context7.next = 7;
+                                                        break;
+                                                    }
+
+                                                    return _context7.abrupt('return', resolve(response.data.data));
+
+                                                case 7:
+                                                    return _context7.abrupt('return', reject(response.statusText));
+
+                                                case 8:
+                                                case 'end':
+                                                    return _context7.stop();
+                                            }
+                                        }
+                                    }, _callee7, _this4);
+                                }));
+
+                                return function (_x16, _x17) {
+                                    return _ref8.apply(this, arguments);
+                                };
+                            }()));
+
+                        case 2:
+                        case 'end':
+                            return _context8.stop();
+                    }
+                }
+            }, _callee8, this);
+        }));
+
+        function _delete(_x14, _x15) {
+            return _ref7.apply(this, arguments);
+        }
+
+        return _delete;
     }()
 };
 

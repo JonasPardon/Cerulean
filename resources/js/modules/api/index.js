@@ -44,6 +44,19 @@ const methods = {
                 return reject(response.statusText);
             }
         });
+    },
+    async delete(entity, identifier) {
+        const deleteUrl = `${baseUrl}/${entity}/${identifier}`;
+
+        return new Promise(async (resolve, reject) => {
+            const response = await axios.delete(deleteUrl);
+
+            if (response.status === 200) {
+                return resolve(response.data.data);
+            } else {
+                return reject(response.statusText);
+            }
+        });
     }
 }
 
