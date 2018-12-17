@@ -78,6 +78,8 @@
 <script>
     import axios from 'axios';
     import moment from 'moment';
+
+    import API from './../../../api';
     
     import Edit from './Edit';
     import Confirm from './../../../../components/generic/confirm/Confirm';
@@ -120,24 +122,15 @@
         methods: {
             async fetchProducts(url = null) {
                 this.loading = true;
-                url = url ? url : '/api/products';
-                
-                this.callApi(url)
-                    .then(response => {
-                        this.products = response.data;
-                        this.links = response.links;
+
+                API.get('products')
+                    .then(res => {
+                        this.loading = false;
+                        this.products = res;
+                    })
+                    .catch(err => {
+                        alert(err);
                     });
-            },
-            async callApi(url) {
-                return new Promise(async (resolve, reject) => {
-
-                    const response = await axios.get(url);
-                    const data = response.data.data;
-                    const links = response.data.links;
-
-                    this.loading = false;
-                    return resolve({data, links});
-                });
             },
             editItem(product) {
                 this.editable = product;

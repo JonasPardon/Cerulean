@@ -90684,10 +90684,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Edit__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -90776,11 +90777,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'home-component',
     components: {
-        'product-edit': __WEBPACK_IMPORTED_MODULE_3__Edit___default.a,
-        'confirm': __WEBPACK_IMPORTED_MODULE_4__components_generic_confirm_Confirm___default.a
+        'product-edit': __WEBPACK_IMPORTED_MODULE_4__Edit___default.a,
+        'confirm': __WEBPACK_IMPORTED_MODULE_5__components_generic_confirm_Confirm___default.a
     },
     data: function data() {
         return {
@@ -90812,14 +90815,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 this.loading = true;
-                                url = url ? url : '/api/products';
 
-                                this.callApi(url).then(function (response) {
-                                    _this.products = response.data;
-                                    _this.links = response.links;
+                                __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */].get('products').then(function (res) {
+                                    _this.loading = false;
+                                    _this.products = res;
+                                }).catch(function (err) {
+                                    alert(err);
                                 });
 
-                            case 3:
+                            case 2:
                             case 'end':
                                 return _context.stop();
                         }
@@ -90832,60 +90836,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return fetchProducts;
-        }(),
-        callApi: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(url) {
-                var _this2 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                return _context3.abrupt('return', new Promise(function () {
-                                    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(resolve, reject) {
-                                        var response, data, links;
-                                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                                            while (1) {
-                                                switch (_context2.prev = _context2.next) {
-                                                    case 0:
-                                                        _context2.next = 2;
-                                                        return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(url);
-
-                                                    case 2:
-                                                        response = _context2.sent;
-                                                        data = response.data.data;
-                                                        links = response.data.links;
-
-
-                                                        _this2.loading = false;
-                                                        return _context2.abrupt('return', resolve({ data: data, links: links }));
-
-                                                    case 7:
-                                                    case 'end':
-                                                        return _context2.stop();
-                                                }
-                                            }
-                                        }, _callee2, _this2);
-                                    }));
-
-                                    return function (_x3, _x4) {
-                                        return _ref3.apply(this, arguments);
-                                    };
-                                }()));
-
-                            case 1:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function callApi(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return callApi;
         }(),
         editItem: function editItem(product) {
             this.editable = product;
@@ -90900,47 +90850,47 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.showEditDialog = true;
         },
         confirmDeleteItem: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
-                var _this3 = this;
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
 
                 var response;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context2.prev = _context2.next) {
                             case 0:
                                 this.showConfirmDialog = false;
                                 this.loading = true;
 
-                                _context4.next = 4;
+                                _context2.next = 4;
                                 return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete('api/products/' + this.deleteable.id).then(function (response) {
                                     if (response.status === 200) {
-                                        _this3.loading = false;
-                                        _this3.products = _this3.products.filter(function (product) {
-                                            return product.id !== _this3.deleteable.id;
+                                        _this2.loading = false;
+                                        _this2.products = _this2.products.filter(function (product) {
+                                            return product.id !== _this2.deleteable.id;
                                         });
-                                        _this3.deleteable = {};
+                                        _this2.deleteable = {};
                                     } else {
                                         alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this3.loading = false;
-                                        _this3.deleteable = {};
+                                        _this2.loading = false;
+                                        _this2.deleteable = {};
                                     }
                                 }).catch(function (err) {
                                     alert(err);
                                 });
 
                             case 4:
-                                response = _context4.sent;
+                                response = _context2.sent;
 
                             case 5:
                             case 'end':
-                                return _context4.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee4, this);
+                }, _callee2, this);
             }));
 
             function confirmDeleteItem() {
-                return _ref4.apply(this, arguments);
+                return _ref2.apply(this, arguments);
             }
 
             return confirmDeleteItem;
@@ -90949,67 +90899,67 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.showEditDialog = false;
         },
         saveProduct: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(product) {
-                var _this4 = this;
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(product) {
+                var _this3 = this;
 
                 var response, _response;
 
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
-                        switch (_context5.prev = _context5.next) {
+                        switch (_context3.prev = _context3.next) {
                             case 0:
                                 this.showEditDialog = false;
                                 this.loading = true;
 
                                 if (this.editable.id) {
-                                    _context5.next = 8;
+                                    _context3.next = 8;
                                     break;
                                 }
 
-                                _context5.next = 5;
+                                _context3.next = 5;
                                 return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/products', product).then(function (response) {
                                     if (response.status === 201) {
-                                        _this4.loading = false;
-                                        _this4.products.push(response.data.data);
+                                        _this3.loading = false;
+                                        _this3.products.push(response.data.data);
                                     } else {
                                         alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this4.loading = false;
+                                        _this3.loading = false;
                                     }
                                 }).catch(function (err) {
                                     alert(err);
                                 });
 
                             case 5:
-                                response = _context5.sent;
-                                _context5.next = 11;
+                                response = _context3.sent;
+                                _context3.next = 11;
                                 break;
 
                             case 8:
-                                _context5.next = 10;
+                                _context3.next = 10;
                                 return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.patch('/api/products/' + product.id, product).then(function (response) {
                                     if (response.status === 200) {
-                                        _this4.loading = false;
+                                        _this3.loading = false;
                                     } else {
                                         alert('Something went wrong.\nStatus code: ' + response.status + '\nStatus message: ' + response.statusText);
-                                        _this4.loading = false;
+                                        _this3.loading = false;
                                     }
                                 }).catch(function (err) {
                                     alert(err);
                                 });
 
                             case 10:
-                                _response = _context5.sent;
+                                _response = _context3.sent;
 
                             case 11:
                             case 'end':
-                                return _context5.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee5, this);
+                }, _callee3, this);
             }));
 
-            function saveProduct(_x5) {
-                return _ref5.apply(this, arguments);
+            function saveProduct(_x2) {
+                return _ref3.apply(this, arguments);
             }
 
             return saveProduct;
@@ -94927,6 +94877,89 @@ var nav = [{
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (nav);
+
+/***/ }),
+/* 240 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+var baseUrl = 'http://app.cerulean.test/api';
+
+var methods = {
+    get: function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(entity) {
+            var _this = this;
+
+            var identifier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+            var getUrl;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            getUrl = baseUrl + '/' + entity + (identifier ? '/' + identifier : '');
+                            return _context2.abrupt('return', new Promise(function () {
+                                var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(resolve, reject) {
+                                    var response;
+                                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                                        while (1) {
+                                            switch (_context.prev = _context.next) {
+                                                case 0:
+                                                    _context.next = 2;
+                                                    return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(getUrl);
+
+                                                case 2:
+                                                    response = _context.sent;
+
+                                                    if (!(response.status === 200)) {
+                                                        _context.next = 7;
+                                                        break;
+                                                    }
+
+                                                    return _context.abrupt('return', resolve(response.data.data));
+
+                                                case 7:
+                                                    return _context.abrupt('return', reject(response.data.statusText));
+
+                                                case 8:
+                                                case 'end':
+                                                    return _context.stop();
+                                            }
+                                        }
+                                    }, _callee, _this);
+                                }));
+
+                                return function (_x3, _x4) {
+                                    return _ref2.apply(this, arguments);
+                                };
+                            }()));
+
+                        case 2:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, _callee2, this);
+        }));
+
+        function get(_x2) {
+            return _ref.apply(this, arguments);
+        }
+
+        return get;
+    }()
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (methods);
 
 /***/ })
 /******/ ]);
