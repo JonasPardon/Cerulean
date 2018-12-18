@@ -94903,7 +94903,7 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("Edit product")
+                  _vm._v(_vm._s(_vm.product.id ? "Edit" : "New") + " product")
                 ])
               ]),
               _vm._v(" "),
