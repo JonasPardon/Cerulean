@@ -1,5 +1,11 @@
 # Cerulean
-Cerulean is a web-based ERP package, made with Laravel and VueJs.
+Cerulean is a web-based ERP package, made with Laravel and VueJs.  
+The aim is to be simple and easy to use, without having too many 
+very specific modules - keep it a bit barebones.
+
+## Project goals
+* I'm primarily doing this to get better at Laravel/VueJS and coding in general
+* Provide a lightweight and pretty barebones ERP that can be used by small businesses
 
 ## Getting started
 
@@ -28,8 +34,11 @@ To run your copy of the website:
 `yarn dev` / `npm run dev` to build the vue.js website once.  
 `yarn watch` / `npm run watch` to build the vue.js website and watch for any changes to then rebuild.
 
+## Contributing
+Contributions are **welcome**, send in a Pull Request.
+
 ## Authors
 * **Jonas Pardon** - jonas@digicreate.be
 
 ## License
-There is no license, this is not open source. 
+GNU General Public License v3.0 (GNU GPLv3)
