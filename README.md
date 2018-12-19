@@ -3,6 +3,9 @@ Cerulean is a web-based ERP package, made with Laravel and VueJs.
 The aim is to be simple and easy to use, without having too many 
 very specific modules - keep it a bit barebones.
 
+The name 'Cerulean' is not set in stone, I am bad at thinking up names
+and consider this the WIP name.
+
 ## Project goals
 * I'm primarily doing this to get better at Laravel/VueJS and coding in general
 * Provide a lightweight and pretty barebones ERP that can be used by small businesses
@@ -28,6 +31,11 @@ Go the the command line and run:
 - `php artisan db:seed`
 
 ### Deployment
+
+The website runs on 3 domains:
+* `cerulean.test` for the front-facing website
+* `app.cerulean.test` for the dashboard
+* `api.cerulean.test` for the API
 
 To run your copy of the website:
 
