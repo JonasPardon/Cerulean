@@ -14,7 +14,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "spatie/laravel-medialibrary": "^7.0.0",
-        "tymon/jwt-auth": "^0.5.12"
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

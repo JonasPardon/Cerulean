@@ -21,14 +21,21 @@ Route::get('/', function() {
     return ['status' => 'Success'];
 });
 
-Route::get('/products', 'ProductController@index');
-Route::get('/products/{id}', 'ProductController@show');
-Route::post('/products', 'ProductController@store');
-Route::patch('/products/{id}', 'ProductController@update');
-Route::delete('/products/{id}', 'ProductController@destroy');
+Route::post('register', 'UserController@register');
+Route::post('login', 'UserController@authenticate');
 
-Route::get('/product_categories', 'ProductCategoryController@index');
-Route::get('/product_categories/{id}', 'ProductCategoryController@show');
-Route::post('/product_categories', 'ProductCategoryController@store');
-Route::patch('/product_categories/{id}', 'ProductCategoryController@update');
-Route::delete('/product_categories/{id}', 'ProductCategoryController@destory');
+Route::group(['middleware' => ['jwt.verify']], function() {
+    
+    Route::get('/products', 'ProductController@index');
+    Route::get('/products/{id}', 'ProductController@show');
+    Route::post('/products', 'ProductController@store');
+    Route::patch('/products/{id}', 'ProductController@update');
+    Route::delete('/products/{id}', 'ProductController@destroy');
+    
+    Route::get('/product_categories', 'ProductCategoryController@index');
+    Route::get('/product_categories/{id}', 'ProductCategoryController@show');
+    Route::post('/product_categories', 'ProductCategoryController@store');
+    Route::patch('/product_categories/{id}', 'ProductCategoryController@update');
+    Route::delete('/product_categories/{id}', 'ProductCategoryController@destory');
+
+});
