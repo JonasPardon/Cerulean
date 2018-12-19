@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent max-width="800px">
       <v-card>
         <v-card-title>
-          <span class="headline">Edit product</span>
+          <span class="headline">{{ product.id ? 'Edit' : 'New'}} product</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
